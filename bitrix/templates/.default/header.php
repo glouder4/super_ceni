@@ -20,5 +20,4 @@ IncludeTemplateLangFile(__FILE__);
 		<input type="submit" name="set_template" value="<?echo GetMessage("DEF_TEMPLATE_NF_SET")?>" />
 	</form>
 </div>
-
 <?endif?>
