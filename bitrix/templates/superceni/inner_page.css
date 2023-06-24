@@ -1,0 +1,26 @@
+#inner_page{
+    margin-top: 45px;
+    padding-bottom: 30px;
+}
+#inner_page>.container{
+    padding-top: 30px;
+    border-top: 1px solid black;
+}
+
+#vakansii .accordion-item,#vakansii .accordion-button{
+    background: unset;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+}
+
+#vakansii .accordion-button{
+    color: #333333;
+    font-weight: 500;
+    font-size: 18px;
+}
+@media(min-width: 1520px){
+    #vakansii .accordion-button{
+        font-size: 24px;
+    }
+}

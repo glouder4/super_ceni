@@ -16,95 +16,66 @@ $APPLICATION->SetTitle("1С-Битрикс: Управление сайтом");
 
 <section id="about_us" class="mt-5">
     <div class="container">
-        <h2 class="text-center text-md-start">О компании</h2>
+        <div class="section_title row ms-0 me-0">
+            <h2 class="text-center text-md-start">О компании</h2>
+        </div>
     </div>
     <div id="about_us-items" class="mt-xxl-5">
         <div class="container">
             <div class="row ms-0 me-0 mt-3">
-            <div class="col-12 col-sm-6 col-md-4 about_us-item text-center">
-                <div class="col-9 col-md-11 mx-auto d-flex flex-column flex-md-row pt-4 pb-4">
-                    <div class="d-flex flex-row justify-content-center align-items-center">
-                        <span>31</span>
-                        <p class="text-start m-0">магазин <br> уже открыт</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 about_us-item text-center">
-                <div class="col-9 col-md-11 mx-auto d-flex flex-column flex-md-row pt-4 pb-4">
-                    <div class="d-flex flex-row justify-content-center align-items-center">
-                        <span>15</span>
-                        <p class="text-start m-0">лет <br> на рынке</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 about_us-item text-center">
-                <div class="col-9 col-md-11 mx-auto d-flex flex-column flex-md-row pt-4 pb-4">
-                    <div class="d-flex flex-row justify-content-center align-items-center">
-                        <span>400</span>
-                        <p class="text-start m-0">сотрудников</p>
-                    </div>
-                </div>
-            </div>
+                <?php
+                    foreach ($_SERVER['template_settings']['about_company_number']['VALUE'] as $key => $about_settings){ ?>
+                        <div class="col-12 col-sm-6 col-md-4 about_us-item text-center">
+                            <div class="col-9 col-md-11 mx-auto d-flex flex-column flex-md-row pt-5 pb-5">
+                                <div class="d-flex flex-row justify-content-center align-items-center">
+                                    <span><?=$_SERVER['template_settings']['about_company_number']['VALUE'][$key]?></span>
+                                    <p class="text-start m-0"><?=$_SERVER['template_settings']['about_company_text']['~VALUE'][$key]?></p>
+                                </div>
+                            </div>
+                        </div>
+                   <? }
+                ?>
         </div>
         </div>
     </div>
 </section>
 
+
+<?php
+    if(CModule::IncludeModule('iblock')) {
+        $arSelect = array("IBLOCK_ID", "ID", "main_slider");
+        $arFilter = array("IBLOCK_ID" => '1', 'ID' => '1');
+        $res = CIBlockElement::GetList(array("SORT" => "ASC"), $arFilter, false, false, $arSelect);
+        while ($ob = $res->GetNextElement()) {
+            $slider = $ob->GetProperties();
+        }
+    }
+?>
 <section id="partnership" class="mt-5">
     <div class="container">
-        <h2 class="text-center text-md-start">Сотрудничество</h2>
+        <div class="section_title row ms-0 me-0">
+            <h2 class="text-center text-md-start">Сотрудничество</h2>
+        </div>
 
         <div id="partnership-slider" class="carousel slide carousel-fade mt-3 mt-xxl-5" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active" data-bg="<?=SITE_TEMPLATE_PATH;?>/base/slider_1.png" data-m_bg="<?=SITE_TEMPLATE_PATH;?>/base/slider_1_m.png" style="background-image: url('<?=SITE_TEMPLATE_PATH;?>/base/slider_1.png');" data-bs-interval="1000000">
-                    <div class="slide_data col-12 col-xxl-6">
-                        <div class="slide_counter">01 / <span>04</span></div>
-                        <div class="slide_title mt-2 mt-md-5">
-                            <h4>Арендодателям</h4>
+                <?php
+                    foreach ($slider['main_slider']['VALUE'] as $key => $slider_item){ $slider_item = $slider_item['SUB_VALUES']; ?>
+                        <div class="carousel-item <?=($key == 0) ? 'active' : '';?>" data-bg="<?=CFile::GetPath($slider_item['main_slider_slide']['VALUE']);?>" data-m_bg="<?=CFile::GetPath($slider_item['main_slider_m_slide']['VALUE']);?>" style="background-image: url('<?=CFile::GetPath($slider_item['main_slider_slide']['VALUE']);?>');">
+                            <div class="slide_data col-12 col-xxl-6">
+                                <div class="slide_counter"><?=($key+1 < 10) ? '0'.($key+1) : ($key+1) ; ?> / <span><?=(count($slider['main_slider']['VALUE']) < 10 ) ? '0'.count($slider['main_slider']['VALUE']) : count($slider['main_slider']['VALUE'])?></span></div>
+                                <div class="slide_title mt-2 mt-md-0">
+                                    <h4><?=$slider_item['main_slider_title']['VALUE'];?></h4>
+                                </div>
+                                <div class="slide_desc mt-2 mt-xxl-0">
+                                    <p>
+                                        <?=$slider_item['main_slider_desc']['~VALUE']['TEXT'];?>
+                                    </p>
+                                </div>
+                                <a href="<?=$slider_item['main_slider_link']['VALUE'];?>" rel="nofollow" class="btn mt-3 mt-md-0"><?=$slider_item['main_slider_btn_text']['VALUE'];?></a>
+                            </div>
                         </div>
-                        <div class="slide_desc mt-2 mt-xxl-4">
-                            <p>
-                                В связи с постоянным расширением сети магазинов "Супер цены" и "Секлея", наша компания постоянно рассматривает предложения об аренде новых торговых помещений.
-                                <br><br>
-                                Преимуществами при рассмотрении ваших предложений будет близость к рынкам или объектам с высоким трафиком.
-                            </p>
-                        </div>
-                        <a href="#" rel="nofollow" class="btn mt-3 mt-md-5">Подробнее</a>
-                    </div>
-                </div>
-                <div class="carousel-item" data-bg="<?=SITE_TEMPLATE_PATH;?>/base/slider_1.png" data-m_bg="<?=SITE_TEMPLATE_PATH;?>/base/slider_1_m.png" style="background-image: url('<?=SITE_TEMPLATE_PATH;?>/base/slider_1.png');" data-bs-interval="1000000">
-                    <div class="slide_data col-12 col-xxl-6">
-                        <div class="slide_counter">02 / <span>04</span></div>
-                        <div class="slide_title mt-2 mt-md-5">
-                            <h4>Франчайзинг</h4>
-                        </div>
-                        <div class="slide_desc mt-2 mt-xxl-4">
-                            <p>
-                                Более 12 лет назад открылся первый франчайзинговый магазин «Супер Цены» в Калининграде.
-                                <br>
-                                <br>
-                                На сегодняшний день успешно работают 30 франчайзинговых универсальных магазина на территории Калининграда и Калининградской области и  в Краснодарском крае.
-                            </p>
-                        </div>
-                        <a href="#" rel="nofollow" class="btn mt-3 mt-md-5">Подробнее</a>
-                    </div>
-                </div>
-                <div class="carousel-item" data-bg="<?=SITE_TEMPLATE_PATH;?>/base/slider_1.png" data-m_bg="<?=SITE_TEMPLATE_PATH;?>/base/slider_1_m.png" style="background-image: url('<?=SITE_TEMPLATE_PATH;?>/base/slider_1.png');" data-bs-interval="1000000">
-                    <div class="slide_data col-12 col-xxl-6">
-                        <div class="slide_counter">03 / <span>04</span></div>
-                        <div class="slide_title mt-2 mt-md-5">
-                            <h4>Арендодателям</h4>
-                        </div>
-                        <div class="slide_desc mt-2 mt-xxl-4">
-                            <p>
-                                В связи с постоянным расширением сети магазинов "Супер цены" и "Секлея", наша компания постоянно рассматривает предложения об аренде новых торговых помещений.
-                                <br><br>
-                                Преимуществами при рассмотрении ваших предложений будет близость к рынкам или объектам с высоким трафиком.
-                            </p>
-                        </div>
-                        <a href="#" rel="nofollow" class="btn mt-3 mt-md-5">Подробнее</a>
-                    </div>
-                </div>
+                   <? } ?>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#partnership-slider" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -119,87 +90,49 @@ $APPLICATION->SetTitle("1С-Битрикс: Управление сайтом");
 </section>
 
 <section id="news" class="mt-5">
-    <div class="container">
-        <h2 class="text-center text-md-start">Акции и новости</h2>
-
-        <div class="row ms-0 me-0 mt-3" id="news_items">
-            <div class="col-12 p-0 col-md-4 news-item">
-                <div class="col-12 col-xxl-12 me-xxl-auto">
-                    <div class="news-item_picture">
-                        <img src="<?=SITE_TEMPLATE_PATH;?>/base/news_item.png" alt="">
-                    </div>
-                    <div class="news-item_date mt-2">
-                        <span>22.05.2023</span>
-                    </div>
-                    <div class="news-item_title mt-2">
-                        <h6>Новые летние поступления</h6>
-                    </div>
-                    <div class="news-item_description mt-2">
-                        <p>Летние платья по 999 рублей. Размеры от S до 2XL. Количество товаров ограничено . </p>
-                    </div>
-                    <div class="news-item_link mt-2">
-                        <a href="#">
-                            Читать
-                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9697 0.46967C11.2626 0.176777 11.7374 0.176777 12.0303 0.46967L18.0303 6.46967C18.3232 6.76256 18.3232 7.23744 18.0303 7.53033L12.0303 13.5303C11.7374 13.8232 11.2626 13.8232 10.9697 13.5303C10.6768 13.2374 10.6768 12.7626 10.9697 12.4697L15.6893 7.75H1.5C1.08579 7.75 0.75 7.41421 0.75 7C0.75 6.58579 1.08579 6.25 1.5 6.25H15.6893L10.9697 1.53033C10.6768 1.23744 10.6768 0.762563 10.9697 0.46967Z" fill="#249D4D"/>
-                            </svg>
-                        </a>
-                    </div>
+        <div class="container">
+            <div class="section_title row ms-0 me-0">
+                <div class="col-12 col-md-6"><h2 class="text-center text-md-start">Акции и новости</h2></div>
+                <div class="col-12 d-none d-md-flex col-md-6 align-items-center justify-content-end">
+                    <a href="#">
+                        Все акции и новости
+                        <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9697 0.46967C11.2626 0.176777 11.7374 0.176777 12.0303 0.46967L18.0303 6.46967C18.3232 6.76256 18.3232 7.23744 18.0303 7.53033L12.0303 13.5303C11.7374 13.8232 11.2626 13.8232 10.9697 13.5303C10.6768 13.2374 10.6768 12.7626 10.9697 12.4697L15.6893 7.75H1.5C1.08579 7.75 0.75 7.41421 0.75 7C0.75 6.58579 1.08579 6.25 1.5 6.25H15.6893L10.9697 1.53033C10.6768 1.23744 10.6768 0.762563 10.9697 0.46967Z" fill="#249D4D"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
 
-            <div class="col-12 col-md-4 news-item mt-3 mt-md-0 p-0">
-                <div class="col-12 p-0 col-xxl-12 mx-xxl-auto">
-                    <div class="news-item_picture">
-                        <img src="<?=SITE_TEMPLATE_PATH;?>/base/news_item.png" alt="">
-                    </div>
-                    <div class="news-item_date mt-2">
-                        <span>22.05.2023</span>
-                    </div>
-                    <div class="news-item_title mt-2">
-                        <h6>Новые летние поступления</h6>
-                    </div>
-                    <div class="news-item_description mt-2">
-                        <p>Летние платья по 999 рублей. Размеры от S до 2XL. Количество товаров ограничено . </p>
-                    </div>
-                    <div class="news-item_link mt-2">
-                        <a href="#">
-                            Читать
-                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9697 0.46967C11.2626 0.176777 11.7374 0.176777 12.0303 0.46967L18.0303 6.46967C18.3232 6.76256 18.3232 7.23744 18.0303 7.53033L12.0303 13.5303C11.7374 13.8232 11.2626 13.8232 10.9697 13.5303C10.6768 13.2374 10.6768 12.7626 10.9697 12.4697L15.6893 7.75H1.5C1.08579 7.75 0.75 7.41421 0.75 7C0.75 6.58579 1.08579 6.25 1.5 6.25H15.6893L10.9697 1.53033C10.6768 1.23744 10.6768 0.762563 10.9697 0.46967Z" fill="#249D4D"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-4 news-item mt-3 mt-md-0 p-0">
-                <div class="col-12 p-0 col-xxl-12 ms-xxl-auto">
-                    <div class="news-item_picture">
-                        <img src="<?=SITE_TEMPLATE_PATH;?>/base/news_item.png" alt="">
-                    </div>
-                    <div class="news-item_date mt-2">
-                        <span>22.05.2023</span>
-                    </div>
-                    <div class="news-item_title mt-2">
-                        <h6>Новые летние поступления</h6>
-                    </div>
-                    <div class="news-item_description mt-2">
-                        <p>Летние платья по 999 рублей. Размеры от S до 2XL. Количество товаров ограничено . </p>
-                    </div>
-                    <div class="news-item_link mt-2">
-                        <a href="#">
-                            Читать
-                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9697 0.46967C11.2626 0.176777 11.7374 0.176777 12.0303 0.46967L18.0303 6.46967C18.3232 6.76256 18.3232 7.23744 18.0303 7.53033L12.0303 13.5303C11.7374 13.8232 11.2626 13.8232 10.9697 13.5303C10.6768 13.2374 10.6768 12.7626 10.9697 12.4697L15.6893 7.75H1.5C1.08579 7.75 0.75 7.41421 0.75 7C0.75 6.58579 1.08579 6.25 1.5 6.25H15.6893L10.9697 1.53033C10.6768 1.23744 10.6768 0.762563 10.9697 0.46967Z" fill="#249D4D"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <?$APPLICATION->IncludeComponent("bitrix:news.line", "akcii_i_novosti", Array(
+                "COMPONENT_TEMPLATE" => ".default",
+                "IBLOCK_TYPE" => "akcii_i_novosti",	// Тип информационного блока
+                "IBLOCKS" => array(	// Код информационного блока
+                    0 => "2",
+                    1 => "3",
+                ),
+                "NEWS_COUNT" => "3",	// Количество новостей на странице
+                "FIELD_CODE" => array(	// Поля
+                    0 => "ID",
+                    1 => "NAME",
+                    2 => "PREVIEW_TEXT",
+                    3 => "PREVIEW_PICTURE",
+                    4 => "DATE_CREATE",
+                    5 => "",
+                ),
+                "SORT_BY1" => "ID",	// Поле для первой сортировки новостей
+                "SORT_ORDER1" => "ASC",	// Направление для первой сортировки новостей
+                "SORT_BY2" => "SORT",	// Поле для второй сортировки новостей
+                "SORT_ORDER2" => "ASC",	// Направление для второй сортировки новостей
+                "DETAIL_URL" => "",	// URL, ведущий на страницу с содержимым элемента раздела
+                "CACHE_TYPE" => "A",	// Тип кеширования
+                "CACHE_TIME" => "300",	// Время кеширования (сек.)
+                "CACHE_GROUPS" => "Y",	// Учитывать права доступа
+                "ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
+            ),
+                false
+            );?>
         </div>
-    </div>
-</section>
+    </section>
 
 <section id="map" class="mt-5">
 

@@ -33,36 +33,15 @@ $(document).ready(function(){
         }
     });
 
-    let adresses = [
-        {
-            'coordinates': '54.710162, 20.510137',
-            'name': 'Калининградская область',
-            'is_point': false
-        },
-        {
-            'coordinates': '44.592869, 38.024952',
-            'name': 'Краснодарский край',
-            'is_point': false
-        },
-        {
-            'coordinates': '55.081349,21.893902',
-            'name': 'г. Советск, ТЦ "Балтика"',
-            'is_point': true,
-            'parent': 0
-        },
-        {
-            'coordinates': '54.720527,20.511144',
-            'name': 'г. Калининград, Центральный рынок"',
-            'is_point': true,
-            'parent': 0
-        },
-        {
-            'coordinates': '44.838850, 38.562492',
-            'name': 'ПГТ Ильский, ул. Комсомольская 44"',
-            'is_point': true,
-            'parent': 1
+    let adresses = [];
+    $.ajax({
+        url: '/get_map_data.php',
+        method: 'get',
+        dataType: 'json',
+        success: function(data){
+            adresses = data;
         }
-    ];
+    });
 
     //Загружаем карту
     ymaps.ready(function () {
@@ -95,44 +74,6 @@ $(document).ready(function(){
             //console.log(coord);
             clickGoto(coord);
             createDealersOnMap();
-        });
-
-        let setScroll = true;
-
-        $('.branche-city-title').click(function () {
-            let th = $(this);
-            coord = th.data('citycoord');
-            let id = th.data('id');
-
-            if (th.hasClass('closed')) {
-                $('.branche-city-box').addClass('closed');
-                $('.branche-city-title:not(.closed)').addClass('closed');
-                $('.branche-city-box').addClass('closed');
-                $('.branche-city-box[data-id="'+id+'"]').removeClass('closed');
-                th.removeClass('closed');
-                $('.yandex-map').removeClass('closed');
-                clickGoto(coord);
-                createDealersOnMap();
-
-                //setTimeout(() => {
-                /* let topPos = th.offset().top - 180;
-                console.log(th.offset().top)
-                console.log(topPos) */
-                let topPos = $('.branches-full-list').offset().top - 180;
-
-                $('html, body').animate({
-                    scrollTop: topPos
-                    //scrollTop: $('.map-inform-wrapper').offset().top
-                    //scrollTop: $(document.querySelector('.map-inform-wrapper[style="display: block;"]')).offset().top
-                }, 500);
-                //}, 400);
-
-            }
-            else {
-                th.addClass('closed');
-                $('.branche-city-box[data-id="'+id+'"]').addClass('closed');
-                $('.yandex-map').addClass('closed');
-            }
         });
 
         $.each(adresses,function (i) {

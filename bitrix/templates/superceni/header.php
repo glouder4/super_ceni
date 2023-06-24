@@ -1,5 +1,21 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 IncludeTemplateLangFile(__FILE__);
+
+if(CModule::IncludeModule('iblock')) {
+    $arSelect = array("IBLOCK_ID", "ID", "about_company_number", "about_company_text","logo_group");
+    $arFilter = array("IBLOCK_ID" => '1', 'ID' => '1');
+    $res = CIBlockElement::GetList(array("SORT" => "ASC"), $arFilter, false, false, $arSelect);
+    while ($ob = $res->GetNextElement()) {
+        $global_settings = $ob->GetProperties();
+    }
+    $_SERVER['template_settings'] = $global_settings;
+}
+/*echo '<pre>';
+    print_r($global_settings['logo_group']['VALUE']['SUB_VALUES']);
+echo '</pre>';*/
+
+
+
 ?>
     <html>
     <head>
@@ -41,7 +57,7 @@ IncludeTemplateLangFile(__FILE__);
             <div id="global_header-mobile_menu" class="row ms-0 me-0 h-100 d-lg-none col-12">
                 <div class="col-8 col-sm-5 h-100">
                     <a id="global_header-logo_link" href="/">
-                        <img id="global_header-logo_img" src="<?=SITE_TEMPLATE_PATH;?>/base/logo_light.svg" alt="Логотип">
+                        <img id="global_header-logo_img" src="<?=CFile::GetPath($_SERVER['template_settings']['logo_group']['VALUE']['SUB_VALUES']['logo_m']['VALUE']);?>" alt="Логотип">
                     </a>
                 </div>
                 <div class="col-4 col-sm-7 h-100 p-0">
@@ -122,17 +138,28 @@ IncludeTemplateLangFile(__FILE__);
             <div id="global_header-main_menu" class="row ms-0 me-0 h-100 d-none d-lg-flex col-12 justify-content-between">
                 <div class="col-lg-3 h-100 d-flex align-items-center">
                     <a id="global_header-logo_link" href="/">
-                        <img id="global_header-logo_img" src="<?=SITE_TEMPLATE_PATH;?>/base/logo.svg" alt="Логотип">
+                        <img id="global_header-logo_img" src="<?=CFile::GetPath($_SERVER['template_settings']['logo_group']['VALUE']['SUB_VALUES']['logo']['VALUE']);?>" alt="Логотип">
                     </a>
                 </div>
                 <div class="col-lg-8 d-flex align-items-center justify-content-between" id="global_header-main_menu-navigation">
                     <div class="col-lg-9">
-                        <ul class="p-0 m-0">
-                            <li><a href="#">О компании</a></li>
-                            <li><a href="#">Покупателям</a></li>
-                            <li><a href="#">Партнерам</a></li>
-                            <li><a href="#">Контакты</a></li>
-                        </ul>
+                        <?php
+                            $APPLICATION->IncludeComponent("bitrix:menu", "main_menu", Array(
+	"ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+		"CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
+		"DELAY" => "N",	// Откладывать выполнение шаблона меню
+		"MAX_LEVEL" => "1",	// Уровень вложенности меню
+		"MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+		"MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+		"MENU_CACHE_TYPE" => "N",	// Тип кеширования
+		"MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
+		"ROOT_MENU_TYPE" => "main",	// Тип меню для первого уровня
+		"USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+		"COMPONENT_TEMPLATE" => ".default"
+	),
+	false
+);
+                            ?>
                     </div>
                     <div class="col-lg-1">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" id="global_header-main_menu-search_btn">
@@ -144,7 +171,7 @@ IncludeTemplateLangFile(__FILE__);
         </nav>
     </div>
 
-    <div id="global_header-main_menu-searcher" class="col-12 d-flex align-items-center">
+    <div id="global_header-main_menu-searcher" class="d-none col-lg-12 d-lg-flex align-items-center">
         <div class="row ms-0 me-0">
             <div class="col-lg-10">
                 <?$APPLICATION->IncludeComponent(

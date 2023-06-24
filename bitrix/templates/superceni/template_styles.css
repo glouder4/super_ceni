@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 body,h1,h2,h3,h4,h5,h6,p,span{
     font-family: 'Roboto';
     color: #333333;
+}
+div#bx-panel *,div.bx-core-popup-menu *{
+    color: inherit;
 }
 body img{
     width: 100%;
@@ -157,7 +160,7 @@ body #global_header .hmb_btn{
 
 
 
-section>.container>h2{
+section>.container h2{
     font-weight: 700;
 }
 #frontpage-banner{
@@ -418,6 +421,45 @@ footer#global_footer #global_footer-social_links>.d-flex{
 footer#global_footer #global_footer-after_footer_data{
     border-top: 1px solid #F2F2F2;
 }
+footer#global_footer #global_footer-after_footer_data>p{
+    color: #F2F2F2;
+}
+#product_categories #product_categories-list{
+    gap: 2px;
+    justify-content: center;
+}
+#product_categories #product_categories-list>.product_card{
+    width: 135px;
+    height: 155px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+    border: 1px solid #DBDBDB;
+
+    max-width: 173px;
+    max-height: 182px;
+}
+#product_categories #product_categories-list>.product_card>.product_card-image{
+    width: 55px;
+    height: 62px;
+}
+#product_categories #product_categories-list>.product_card>.product_card-image img{
+    width: 100%;
+}
+#product_categories #product_categories-list>.product_card>.product_card-title{
+    font-size: 18px;
+}
+.bx-breadcrumb .bx-breadcrumb-item a{
+    text-decoration: none;
+}
+.bx-breadcrumb .bx-breadcrumb-item a>span,.bx-breadcrumb .bx-breadcrumb-item{
+    color: #333333;
+    font-size: 14px;
+}
 
 @media(min-width: 576px){
     #map #map-navigation{
@@ -425,6 +467,15 @@ footer#global_footer #global_footer-after_footer_data{
         left: 10px;
         gap: 7px;
         max-width: calc(100% - 10px);
+    }
+
+    #product_categories #product_categories-list>.product_card {
+        width: 160px;
+        height: 160px;
+    }
+    #product_categories #product_categories-list>.product_card>.product_card-image {
+        width: 55px;
+        height: 62px;
     }
 }
 
@@ -501,6 +552,18 @@ footer#global_footer #global_footer-after_footer_data{
     }
     #partnership #partnership-slider .carousel-item h4{
         font-weight: 700;
+    }
+
+    section#news>.container>.section_title a{
+        color: #249D4D;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 18px;
+
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
     }
     #news #news_items .news-item .news-item_picture{
         min-height: 245px;
@@ -602,7 +665,7 @@ footer#global_footer #global_footer-after_footer_data{
     #frontpage-banner a.btn{
         font-size: 18px;
     }
-    section>.container>h2{
+    section>.container h2{
         font-size: 36px;
     }
     #about_us #about_us-items .about_us-item span {
@@ -654,13 +717,27 @@ footer#global_footer #global_footer-after_footer_data{
         font-weight: 700;
     }
 }
-
+@media(min-width: 1400px){
+    #news #news_items{
+        justify-content: space-between;
+    }
+    #news #news_items .news-item.col-md-4{
+        width: 32%;
+    }
+    footer#global_footer>.container>.row>.col-xxl-3{
+        width: 22%;
+    }
+    footer#global_footer>.container>.row>.col-xxl-6{
+        width: 56%;
+    }
+}
 @media(min-width: 1520px){
     body #global_header #global_header-main_menu #global_header-main_menu-navigation ul a{
         font-size: 20px;
     }
     #frontpage-banner{
         height: 680px;
+        background-size: cover;
     }
     #frontpage-banner .banner_data{
         background: unset;
@@ -673,7 +750,7 @@ footer#global_footer #global_footer-after_footer_data{
         margin-top: 30px;
     }
 
-    section>.container>h2{
+    section>.container>.section_title{
         margin-top: 85px;
     }
     #about_us #about_us-items .about_us-item>div>div{
@@ -691,6 +768,14 @@ footer#global_footer #global_footer-after_footer_data{
     }
     #partnership #partnership-slider .carousel-item{
         height: 480px;
+        display: flex;
+        align-items: center;
+    }
+    #partnership #partnership-slider .carousel-item>.slide_data{
+        height: 380px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
     #partnership #partnership-slider button.carousel-control-prev, #partnership #partnership-slider button.carousel-control-next{
         bottom: 25px;
@@ -705,6 +790,10 @@ footer#global_footer #global_footer-after_footer_data{
         justify-content: space-between;
     }
     #news #news_items .news-item.col-md-4{
-        width: 32%;
+        width: 33%;
+    }
+    #product_categories #product_categories-list{
+        gap: unset;
+        justify-content: space-between;
     }
 }
