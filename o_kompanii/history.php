@@ -179,34 +179,36 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/inner_page.css");
                         </div>
                     </div>
 
-                    <?$APPLICATION->IncludeComponent("bitrix:news.line", "akcii_i_novosti", Array(
-                        "COMPONENT_TEMPLATE" => ".default",
-                        "IBLOCK_TYPE" => "akcii_i_novosti",	// Тип информационного блока
-                        "IBLOCKS" => array(	// Код информационного блока
-                            0 => "2",
-                            1 => "3",
-                        ),
-                        "NEWS_COUNT" => "3",	// Количество новостей на странице
-                        "FIELD_CODE" => array(	// Поля
-                            0 => "ID",
-                            1 => "NAME",
-                            2 => "PREVIEW_TEXT",
-                            3 => "PREVIEW_PICTURE",
-                            4 => "DATE_CREATE",
-                            5 => "",
-                        ),
-                        "SORT_BY1" => "ID",	// Поле для первой сортировки новостей
-                        "SORT_ORDER1" => "ASC",	// Направление для первой сортировки новостей
-                        "SORT_BY2" => "SORT",	// Поле для второй сортировки новостей
-                        "SORT_ORDER2" => "ASC",	// Направление для второй сортировки новостей
-                        "DETAIL_URL" => "",	// URL, ведущий на страницу с содержимым элемента раздела
-                        "CACHE_TYPE" => "A",	// Тип кеширования
-                        "CACHE_TIME" => "300",	// Время кеширования (сек.)
-                        "CACHE_GROUPS" => "Y",	// Учитывать права доступа
-                        "ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
-                    ),
-                        false
-                    );?>
+                    <?$APPLICATION->IncludeComponent(
+	"bitrix:news.line", 
+	"akcii_i_novosti", 
+	array(
+		"COMPONENT_TEMPLATE" => "akcii_i_novosti",
+		"IBLOCK_TYPE" => "akcii_i_novosti",
+		"IBLOCKS" => array(
+			0 => "7",
+		),
+		"NEWS_COUNT" => "3",
+		"FIELD_CODE" => array(
+			0 => "ID",
+			1 => "NAME",
+			2 => "PREVIEW_TEXT",
+			3 => "PREVIEW_PICTURE",
+			4 => "DATE_CREATE",
+			5 => "",
+		),
+		"SORT_BY1" => "ID",
+		"SORT_ORDER1" => "ASC",
+		"SORT_BY2" => "SORT",
+		"SORT_ORDER2" => "ASC",
+		"DETAIL_URL" => "",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "300",
+		"CACHE_GROUPS" => "Y",
+		"ACTIVE_DATE_FORMAT" => "d.m.Y"
+	),
+	false
+);?>
                 </div>
             </section>
         </div>

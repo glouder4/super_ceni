@@ -1,0 +1,109 @@
+#inner_page{
+    margin-top: 45px;
+    padding-bottom: 30px;
+}
+#inner_page>.container{
+    padding-top: 30px;
+    border-top: 1px solid black;
+}
+
+#vakansii .accordion-item,#vakansii .accordion-button{
+    background: unset;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+}
+
+#vakansii .accordion-button{
+    color: #333333;
+    font-weight: 500;
+    font-size: 18px;
+}
+#webform p{
+    font-size: 16px;
+}
+#webform svg{
+    transform: rotate(90deg);
+    width: 100%;
+}
+#webform-form label{
+    font-size: 16px;
+    font-weight: 400;
+}
+#webform-form input,#webform-form textarea{
+    border-color: #8B8B8B;
+}
+#webform-form input::placeholder,#webform-form textarea::placeholder{
+    color: #DBDBDB;
+}
+#webform-form .form-check label{
+    font-size: 13px;
+}
+#webform-form button[type='submit'],#vakansii .btn{
+    background-color: #249D4D;
+    color: white;
+    font-size: 16px;
+    border: 0;
+    padding: 10px 40px;
+}
+#shops_map .accordion-button,#shops_map .accordion-button:not(.collapsed){
+    background-color: #F8F8F8;
+
+    color: black;
+    box-shadow: none;
+}
+#shops_map .bordered_data{
+    border-top: 1px solid black;
+}
+#shops_map .bordered_data ul{
+    list-style: none;
+}
+#shops_map .bordered_data ul>li{
+    font-size: 16px;
+}
+#shops_map .bordered_data ul>li{
+    font-weight: 300;
+}
+#shops_map .bordered_data ul>li>span{
+    font-weight: 400;
+}
+#shops_map .accordion-item{
+    position: relative;
+}
+#shops_map #selected_city_shop_data .h4{
+    font-size: 24px;
+    font-weight: 400;
+}
+#shops_map #selected_city_shop_data #shop_data p{
+    font-size: 16px;
+}
+#shops_map #selected_city_shop_data #shop_data p>span{
+    font-weight: 600;
+}
+#shops_map .bordered_data ul>li:hover{
+    cursor: pointer;
+}
+#shops_map .bordered_data ul>li>span{
+    font-weight: 600;
+}
+#shops_map  .accordion-item .accordion-collapse{
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    background-color: #F8F8F8;
+}
+
+#inner_page #map #map-navigation>div{
+    font-size: 12px;
+    width: 130px;
+}
+@media(min-width: 1200px){
+    #webform svg{
+        transform: rotate(0);
+    }
+}
+@media(min-width: 1520px){
+    #vakansii .accordion-button{
+        font-size: 24px;
+    }
+}
