@@ -1,45 +1,53 @@
 #inner_page{
     margin-top: 45px;
     padding-bottom: 30px;
+
+    min-height: 100vh;
 }
 #inner_page>.container{
     padding-top: 30px;
     border-top: 1px solid black;
 }
 
-#vakansii .accordion-item,#vakansii .accordion-button{
+.accordion .accordion-item,.accordion .accordion-button{
     background: unset;
     border-left: 0;
     border-right: 0;
     border-radius: 0;
 }
 
-#vakansii .accordion-button{
+.accordion .accordion-button{
     color: #333333;
     font-weight: 500;
     font-size: 18px;
 }
-#webform p{
+.accordion .accordion-button:focus{
+    box-shadow: none;
+}
+.webform p.h4{
+    font-size: 21px;
+}
+.webform p{
     font-size: 16px;
 }
-#webform svg{
+.webform svg{
     transform: rotate(90deg);
     width: 100%;
 }
-#webform-form label{
+.webform-form label{
     font-size: 16px;
     font-weight: 400;
 }
-#webform-form input,#webform-form textarea{
+.webform-form input,.webform-form textarea{
     border-color: #8B8B8B;
 }
-#webform-form input::placeholder,#webform-form textarea::placeholder{
+.webform-form input::placeholder,.webform-form textarea::placeholder{
     color: #DBDBDB;
 }
-#webform-form .form-check label{
+.webform-form .form-check label{
     font-size: 13px;
 }
-#webform-form button[type='submit'],#vakansii .btn{
+.webform-form button[type='submit'],#vakansii .btn{
     background-color: #249D4D;
     color: white;
     font-size: 16px;
@@ -97,13 +105,27 @@
     font-size: 12px;
     width: 130px;
 }
+
+#additional_data-main_info ul{
+    margin: 0;
+}
+#additional_data-main_info ul>li{
+    margin-top: 15px;
+}
 @media(min-width: 1200px){
-    #webform svg{
+    .webform svg{
         transform: rotate(0);
     }
 }
 @media(min-width: 1520px){
-    #vakansii .accordion-button{
+    .accordion .accordion-button{
         font-size: 24px;
+    }
+    #inner_page{
+        margin-top: 75px;
+    }
+
+    .webform p.h4{
+        font-size: 27px;
     }
 }

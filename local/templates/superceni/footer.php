@@ -13,35 +13,83 @@
             <div class="col-12 order-2 col-md-12 mt-3 order-md-3 mt-lg-5 col-xxl-6 order-xxl-2 mt-xxl-0" id="global_footer-links">
                 <div class="row ms-0 me-0">
                     <div class="col-12 col-sm-3 col-md-3 col-xxl-3">
-                        <ul class="p-0">
-                            <li class="lighted"><a href="#">О компании</a></li>
-                            <li><a href="#">История</a></li>
-                            <li><a href="#">Вакансии</a></li>
-                        </ul>
+                        <?php
+                        $APPLICATION->IncludeComponent("bitrix:menu", "footer_column_menu", Array(
+                            "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+                            "CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
+                            "DELAY" => "N",	// Откладывать выполнение шаблона меню
+                            "MAX_LEVEL" => "1",	// Уровень вложенности меню
+                            "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+                            "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+                            "MENU_CACHE_TYPE" => "N",	// Тип кеширования
+                            "MENU_CACHE_USE_GROUPS" => "N",	// Учитывать права доступа
+                            "ROOT_MENU_TYPE" => "footer_column_1",	// Тип меню для первого уровня
+                            "USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+                            "COMPONENT_TEMPLATE" => ".default"
+                        ),
+                            false
+                        );
+                        ?>
                     </div>
 
                     <div class="col-12 col-sm-3 col-md-3 col-xxl-4">
-                        <ul class="p-0">
-                            <li class="lighted"><a href="#">Партнерам</a></li>
-                            <li><a href="#">Поставщикам услуг</a></li>
-                            <li><a href="#">Поставщикам товаров</a></li>
-                            <li><a href="#">Арендодателям</a></li>
-                            <li><a href="#">Франчайзинг</a></li>
-                        </ul>
+                        <?php
+                        $APPLICATION->IncludeComponent("bitrix:menu", "footer_column_menu", Array(
+                            "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+                            "CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
+                            "DELAY" => "N",	// Откладывать выполнение шаблона меню
+                            "MAX_LEVEL" => "1",	// Уровень вложенности меню
+                            "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+                            "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+                            "MENU_CACHE_TYPE" => "N",	// Тип кеширования
+                            "MENU_CACHE_USE_GROUPS" => "N",	// Учитывать права доступа
+                            "ROOT_MENU_TYPE" => "footer_column_2",	// Тип меню для первого уровня
+                            "USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+                            "COMPONENT_TEMPLATE" => ".default"
+                        ),
+                            false
+                        );
+                        ?>
                     </div>
 
                     <div class="col-12 col-sm-3 col-md-3 col-xxl-3">
-                        <ul class="p-0">
-                            <li class="lighted"><a href="#">Покупателям</a></li>
-                            <li><a href="#">Магазины</a></li>
-                            <li><a href="#">Акции и новости</a></li>
-                        </ul>
+                        <?php
+                        $APPLICATION->IncludeComponent("bitrix:menu", "footer_column_menu", Array(
+                            "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+                            "CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
+                            "DELAY" => "N",	// Откладывать выполнение шаблона меню
+                            "MAX_LEVEL" => "1",	// Уровень вложенности меню
+                            "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+                            "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+                            "MENU_CACHE_TYPE" => "N",	// Тип кеширования
+                            "MENU_CACHE_USE_GROUPS" => "N",	// Учитывать права доступа
+                            "ROOT_MENU_TYPE" => "footer_column_3",	// Тип меню для первого уровня
+                            "USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+                            "COMPONENT_TEMPLATE" => ".default"
+                        ),
+                            false
+                        );
+                        ?>
                     </div>
 
                     <div class="col-12 col-sm-3 col-md-3 col-xxl-2">
-                        <ul class="p-0">
-                            <li class="lighted"><a href="#">Контакты</a></li>
-                        </ul>
+                        <?php
+                        $APPLICATION->IncludeComponent("bitrix:menu", "footer_column_menu", Array(
+                            "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+                            "CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
+                            "DELAY" => "N",	// Откладывать выполнение шаблона меню
+                            "MAX_LEVEL" => "1",	// Уровень вложенности меню
+                            "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+                            "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+                            "MENU_CACHE_TYPE" => "N",	// Тип кеширования
+                            "MENU_CACHE_USE_GROUPS" => "N",	// Учитывать права доступа
+                            "ROOT_MENU_TYPE" => "footer_column_4",	// Тип меню для первого уровня
+                            "USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+                            "COMPONENT_TEMPLATE" => ".default"
+                        ),
+                            false
+                        );
+                        ?>
                     </div>
                 </div>
             </div>

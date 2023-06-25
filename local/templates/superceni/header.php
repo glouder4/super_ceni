@@ -1,6 +1,8 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 IncludeTemplateLangFile(__FILE__);
 
+use Bitrix\Main\Page\Asset;
+
 if(CModule::IncludeModule('iblock')) {
     $arSelect = array("IBLOCK_ID", "ID", "about_company_number", "about_company_text","logo_group");
     $arFilter = array("IBLOCK_ID" => '1', 'ID' => '1');
@@ -28,20 +30,23 @@ echo '</pre>';*/
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="theme-color" content="#3498db">
         <?CJSCore::Init(array("fx", "ajax", "window", "popup"));?>
-        <?$APPLICATION->SetAdditionalCSS("https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css");?>
-        <?$APPLICATION->SetAdditionalCSS("https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css");?>
-        <?$APPLICATION->SetAdditionalCSS("https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css");?>
+        <?Asset::getInstance()->addCss("https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css");?>
+        <?Asset::getInstance()->addCss("https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css");?>
+        <?Asset::getInstance()->addCss("https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css");?>
+        <?Asset::getInstance()->addCss("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css");?>
 
 
-        <?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/template_styles.css");?>
-        <?$APPLICATION->AddHeadScript("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js");?>
-        <?$APPLICATION->AddHeadScript("https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js");?>
-        <?$APPLICATION->AddHeadScript("https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js");?>
-        <?$APPLICATION->AddHeadScript("https://cdn.jsdelivr.net/npm/wowjs@1.1.3/dist/wow.min.js");?>
-        <?$APPLICATION->AddHeadScript("https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js");?>
-        <?$APPLICATION->AddHeadScript("https://cdnjs.cloudflare.com/ajax/libs/jquery-animateNumber/0.0.9/jquery.animateNumber.min.js");?>
+        <?Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/template_styles.css");?>
+        <?Asset::getInstance()->addJs("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js");?>
+        <?Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js");?>
+        <?Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js");?>
+        <?Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/wowjs@1.1.3/dist/wow.min.js");?>
+        <?Asset::getInstance()->addJs("https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js");?>
+        <?Asset::getInstance()->addJs("https://cdnjs.cloudflare.com/ajax/libs/jquery-animateNumber/0.0.9/jquery.animateNumber.min.js");?>
+        <?Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/sweetalert2@11");?>
+        <?Asset::getInstance()->addJs("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js");?>
 
-        <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/template_scripts.js");?>
+        <?Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/template_scripts.js");?>
     </head>
 
 <body>

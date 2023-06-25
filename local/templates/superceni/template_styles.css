@@ -430,7 +430,7 @@ footer#global_footer #global_footer-after_footer_data>p{
     gap: 2px;
     justify-content: center;
 }
-#product_categories #product_categories-list>.product_card{
+#product_categories #product_categories-list .product_card{
     width: 135px;
     height: 155px;
     padding: 20px;
@@ -445,14 +445,14 @@ footer#global_footer #global_footer-after_footer_data>p{
     max-width: 173px;
     max-height: 182px;
 }
-#product_categories #product_categories-list>.product_card>.product_card-image{
+#product_categories #product_categories-list .product_card>.product_card-image{
     width: 55px;
     height: 62px;
 }
-#product_categories #product_categories-list>.product_card>.product_card-image img{
+#product_categories #product_categories-list .product_card>.product_card-image img{
     width: 100%;
 }
-#product_categories #product_categories-list>.product_card>.product_card-title{
+#product_categories #product_categories-list .product_card>.product_card-title{
     font-size: 18px;
 }
 .bx-breadcrumb .bx-breadcrumb-item a{
@@ -510,11 +510,11 @@ footer#global_footer #global_footer-after_footer_data>p{
         max-width: calc(100% - 10px);
     }
 
-    #product_categories #product_categories-list>.product_card {
+    #product_categories #product_categories-list .product_card {
         width: 160px;
         height: 160px;
     }
-    #product_categories #product_categories-list>.product_card>.product_card-image {
+    #product_categories #product_categories-list .product_card>.product_card-image {
         width: 55px;
         height: 62px;
     }
@@ -773,6 +773,17 @@ footer#global_footer #global_footer-after_footer_data>p{
     }
 }
 @media(min-width: 1520px){
+    body #global_header #global_header-main_menu>.col-lg-3{
+        padding-left: 0;
+    }
+    body #global_header #global_header-main_menu #global_header-main_menu-navigation{
+        padding-right: 0;
+    }
+    body #global_header #global_header-main_menu #global_header-main_menu-navigation>.col-lg-1{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
     body #global_header #global_header-main_menu #global_header-main_menu-navigation ul a{
         font-size: 20px;
     }

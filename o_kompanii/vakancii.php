@@ -94,53 +94,68 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/inner_page.css");
 );?>
 
 
-            <div id="webform" class="mt-5">
-                <div class="row ms-0 me-0">
-                    <div class="col-12 col-xl-6">
-                        <div class="d-flex flex-row align-items-center">
-                            <p>Если вы не нашли интересующую вакансию — заполните анкету и Мы обязательно с вами свяжемся</p>
-                            <svg width="101" height="12" viewBox="0 0 101 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M100.53 6.53033C100.823 6.23744 100.823 5.76256 100.53 5.46967L95.7574 0.696699C95.4645 0.403806 94.9896 0.403806 94.6967 0.696699C94.4038 0.989593 94.4038 1.46447 94.6967 1.75736L98.9393 6L94.6967 10.2426C94.4038 10.5355 94.4038 11.0104 94.6967 11.3033C94.9896 11.5962 95.4645 11.5962 95.7574 11.3033L100.53 6.53033ZM0 6.75L100 6.75V5.25L0 5.25L0 6.75Z" fill="#249D4D"/>
-                            </svg>
-                        </div>
-                    </div>
+            <?$APPLICATION->IncludeComponent(
+                "bitrix:news.detail",
+                "webform_template",
+                array(
+                    "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                    "ADD_ELEMENT_CHAIN" => "N",
+                    "ADD_SECTIONS_CHAIN" => "N",
+                    "AJAX_MODE" => "N",
+                    "AJAX_OPTION_ADDITIONAL" => "",
+                    "AJAX_OPTION_HISTORY" => "N",
+                    "AJAX_OPTION_JUMP" => "N",
+                    "AJAX_OPTION_STYLE" => "Y",
+                    "BROWSER_TITLE" => "-",
+                    "CACHE_GROUPS" => "N",
+                    "CACHE_TIME" => "36000000",
+                    "CACHE_TYPE" => "A",
+                    "CHECK_DATES" => "Y",
+                    "DETAIL_URL" => "",
+                    "DISPLAY_BOTTOM_PAGER" => "Y",
+                    "DISPLAY_DATE" => "Y",
+                    "DISPLAY_NAME" => "Y",
+                    "DISPLAY_PICTURE" => "Y",
+                    "DISPLAY_PREVIEW_TEXT" => "Y",
+                    "DISPLAY_TOP_PAGER" => "N",
+                    "ELEMENT_CODE" => "",
+                    "ELEMENT_ID" => "16",
+                    "FIELD_CODE" => array(
+                        0 => "",
+                        1 => "",
+                    ),
+                    "IBLOCK_ID" => "10",
+                    "IBLOCK_TYPE" => "web_forms",
+                    "IBLOCK_URL" => "",
+                    "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                    "MESSAGE_404" => "",
+                    "META_DESCRIPTION" => "-",
+                    "META_KEYWORDS" => "-",
+                    "PAGER_BASE_LINK_ENABLE" => "N",
+                    "PAGER_SHOW_ALL" => "N",
+                    "PAGER_TEMPLATE" => ".default",
+                    "PAGER_TITLE" => "Страница",
+                    "PROPERTY_CODE" => array(
+                        0 => "form_fields",
+                        1 => "",
+                    ),
+                    "SET_BROWSER_TITLE" => "N",
+                    "SET_CANONICAL_URL" => "N",
+                    "SET_LAST_MODIFIED" => "N",
+                    "SET_META_DESCRIPTION" => "N",
+                    "SET_META_KEYWORDS" => "N",
+                    "SET_STATUS_404" => "N",
+                    "SET_TITLE" => "N",
+                    "SHOW_404" => "N",
+                    "STRICT_SECTION_CHECK" => "N",
+                    "USE_PERMISSIONS" => "N",
+                    "USE_SHARE" => "N",
+                    "COMPONENT_TEMPLATE" => "webform_template"
+                ),
+                false
+            );?>
 
-                    <div class="col-12 col-xl-6 mt-5 mt-md-0">
-                        <form id="webform-form">
-                            <div class="mb-3">
-                                <label for="post" class="form-label">Должность</label>
-                                <input type="text" class="form-control" id="post" name="post" placeholder="Продавец консультант">
-                            </div>
-                            <div class="mb-3">
-                                <label for="fio" class="form-label">ФИО</label>
-                                <input type="text" class="form-control" id="fio" name="fio" placeholder="Васильева Марина Андреевна">
-                            </div>
-                            <div class="mb-3" style="max-width: 177px;">
-                                <label for="bdate" class="form-label">Дата рождения</label>
-                                <input type="date" class="form-control" id="bdate" name="bdate" placeholder="15.06.1991">
-                            </div>
-                            <div class="mb-3" style="max-width: 177px;">
-                                <label for="tel" class="form-label">Дата рождения</label>
-                                <input type="tel" class="form-control" id="tel" name="tel" placeholder="+7 (">
-                            </div>
-                            <div class="mb-3">
-                                <label for="work_exp" class="form-label">Опишите вашу трудовую деятельность</label>
-                                <textarea name="work_exp" id="work_exp" class="form-control" cols="30" rows="10"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="about_ur_self" class="form-label">Какую информацию вы бы хотели добавить о себе?</label>
-                                <textarea name="about_ur_self" id="about_ur_self" class="form-control" cols="30" rows="10"></textarea>
-                            </div>
 
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Нажимая кнопку «Отправить», я даю свое согласие на обработку моих персональных данных, в соответствии с Федеральным законом от 27.07.2006 года №152-ФЗ «О персональных данных», на условиях и для целей, определенных в Согласии на обработку персональных данных</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Отправить анкету</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
