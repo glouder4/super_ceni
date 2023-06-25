@@ -32,7 +32,7 @@
                         ?>
                     </div>
 
-                    <div class="col-12 col-sm-3 col-md-3 col-xxl-4">
+                    <div class="col-12 col-sm-3 col-md-3 col-xxl-4 mt-4 mt-md-0">
                         <?php
                         $APPLICATION->IncludeComponent("bitrix:menu", "footer_column_menu", Array(
                             "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
@@ -52,7 +52,7 @@
                         ?>
                     </div>
 
-                    <div class="col-12 col-sm-3 col-md-3 col-xxl-3">
+                    <div class="col-12 col-sm-3 col-md-3 col-xxl-3 mt-4 mt-md-0">
                         <?php
                         $APPLICATION->IncludeComponent("bitrix:menu", "footer_column_menu", Array(
                             "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
@@ -72,7 +72,7 @@
                         ?>
                     </div>
 
-                    <div class="col-12 col-sm-3 col-md-3 col-xxl-2">
+                    <div class="col-12 col-sm-3 col-md-3 col-xxl-2 mt-4 mt-md-0">
                         <?php
                         $APPLICATION->IncludeComponent("bitrix:menu", "footer_column_menu", Array(
                             "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
@@ -93,7 +93,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 order-3 col-md-7 order-md-2 col-xxl-3 order-xxl-3 pe-xxl-0">
+            <div class="col-12 order-3 col-md-7 order-md-2 col-xxl-3 order-xxl-3 pe-xxl-0 mt-4 mt-md-0">
                 <div class="col-12 p-0 col-xxl-10 ms-xxl-auto">
                     <div id="global_footer-searcher" class="col-12">
                         <?$APPLICATION->IncludeComponent(
@@ -110,8 +110,11 @@
                     <div class="col-12 mt-3 d-md-none d-xxl-block mt-xxl-4" id="global_footer-social_links">
                         <div class="h5 m-0"><span>Мы в социальных сетях</span></div>
                         <div class="d-flex flex-row flex-wrap mt-2">
-                            <a href="#"><img src="<?=SITE_TEMPLATE_PATH;?>/base/tg.svg" alt=""></a>
-                            <a href="#"><img src="<?=SITE_TEMPLATE_PATH;?>/base/tg.svg" alt=""></a>
+                            <?php
+                                foreach($_SERVER['template_settings']['social_links']['VALUE'] as $social_link){ ?>
+                                    <a href="<?=$social_link['SUB_VALUES']['social_link']['VALUE'];?>"><img src="<?=CFile::GetPath($social_link['SUB_VALUES']['social_link_icon']['VALUE']);;?>" alt=""></a>
+                                <?php }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -121,8 +124,11 @@
                 <div class="col-12 mt-3" id="global_footer-social_links">
                     <div class="h5 m-0"><span>Мы в социальных сетях</span></div>
                     <div class="d-flex flex-row flex-wrap mt-2">
-                        <a href="#"><img src="<?=SITE_TEMPLATE_PATH;?>/base/tg.svg" alt=""></a>
-                        <a href="#"><img src="<?=SITE_TEMPLATE_PATH;?>/base/tg.svg" alt=""></a>
+                        <?php
+                        foreach($_SERVER['template_settings']['social_links']['VALUE'] as $social_link){ ?>
+                            <a href="<?=$social_link['SUB_VALUES']['social_link']['VALUE'];?>"><img src="<?=CFile::GetPath($social_link['SUB_VALUES']['social_link_icon']['VALUE']);;?>" alt=""></a>
+                        <?php }
+                        ?>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@ $this->setFrameMode(true);
     if( strlen($arResult["DETAIL_TEXT"]) > 0 ){ ?>
         <div id="additional_page_data" class="mt-5 row ms-0 me-0 col-12 p-0">
             <div class="col-12 col-md-6 p-0" id="additional_data-main_info">
-                <div class="col-12 col-md-11 ms-auto">
+                <div class="col-12 col-md-11 me-auto">
                     <h1 class="mt-0"><?=$arResult["NAME"]?></h1>
                     <p class="mt-4"><?echo $arResult["DETAIL_TEXT"];?></p>
                 </div>

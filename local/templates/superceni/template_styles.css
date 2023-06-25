@@ -121,6 +121,32 @@ body #global_header .hmb_cols{
 body #global_header .hmb_cols > div{
     width: calc((100% - 30px) / 2);
 }
+
+body #global_header #mobile_navigation_bar-social_links .hmb_col_list{
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+body #global_header #mobile_navigation_bar-social_links .hmb_col_list a{
+    width: 40px;
+    height: 40px;
+    margin-top: 0;
+}
+body #global_header #mobile_navigation_bar nav{
+    margin-top: 15px;
+}
+body #global_header #mobile_navigation_bar nav li{
+    margin-top: 15px;
+}
+body #global_header #mobile_navigation_bar nav li>a{
+    color: white;
+    text-decoration: none;
+
+    font-size: 21px;
+}
+
+
 body #global_header .hmb_col_title{
     color: #fff;
     opacity: .5;
@@ -157,6 +183,8 @@ body #global_header .hmb_btn{
     color: #fff;
     width: 100%;
 }
+
+
 
 
 

@@ -47,7 +47,7 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/inner_page.css");
 		"DISPLAY_BOTTOM_PAGER" => "Y",	// Выводить под результатами
 		"PAGER_TITLE" => "Результаты поиска",	// Название результатов поиска
 		"PAGER_SHOW_ALWAYS" => "Y",	// Выводить всегда
-		"PAGER_TEMPLATE" => "",	// Название шаблона
+		"PAGER_TEMPLATE" => "custom_template",	// Название шаблона
 		"AJAX_OPTION_SHADOW" => "Y",
 		"AJAX_OPTION_JUMP" => "N",	// Включить прокрутку к началу компонента
 		"AJAX_OPTION_STYLE" => "Y",	// Включить подгрузку стилей

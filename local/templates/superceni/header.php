@@ -4,7 +4,7 @@ IncludeTemplateLangFile(__FILE__);
 use Bitrix\Main\Page\Asset;
 
 if(CModule::IncludeModule('iblock')) {
-    $arSelect = array("IBLOCK_ID", "ID", "about_company_number", "about_company_text","logo_group");
+    $arSelect = array("IBLOCK_ID", "ID", "about_company_number", "about_company_text","logo_group",'social_links','adress','phones','time_of_work');
     $arFilter = array("IBLOCK_ID" => '1', 'ID' => '1');
     $res = CIBlockElement::GetList(array("SORT" => "ASC"), $arFilter, false, false, $arSelect);
     while ($ob = $res->GetNextElement()) {
@@ -104,38 +104,57 @@ echo '</pre>';*/
             <div class="collapse navbar-collapse" id="mobile_navigation_bar">
                 <div class="hmb_menu">
                     <div class="hmb_inner_menu container">
-                        <nav class="hmb_nav"></nav>
+                        <nav class="hmb_nav">
+                            <?php
+                            $APPLICATION->IncludeComponent("bitrix:menu", "main_menu", Array(
+                                "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+                                "CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
+                                "DELAY" => "N",	// Откладывать выполнение шаблона меню
+                                "MAX_LEVEL" => "1",	// Уровень вложенности меню
+                                "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+                                "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+                                "MENU_CACHE_TYPE" => "N",	// Тип кеширования
+                                "MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
+                                "ROOT_MENU_TYPE" => "main",	// Тип меню для первого уровня
+                                "USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+                                "COMPONENT_TEMPLATE" => ".default"
+                            ),
+                                false
+                            );
+                            ?>
+                        </nav>
                         <div class="hmb_cols">
                             <div class="hmb_col">
-                                <div class="hmb_col_title">Телефоны</div>
+                                <div class="hmb_col_title" id="mobile_navigation_bar-phones">Телефоны</div>
                                 <div class="hmb_col_list">
-                                    <a href="tel:+">+7 (777) 999 88 77</a>
-                                    <a href="tel:+">+7 (999) 777 88 88</a>
+                                    <?php
+                                    foreach($_SERVER['template_settings']['phones']['VALUE'] as $phone){ ?>
+                                        <a href="tel:<?=$phone['SUB_VALUES']['phone']['VALUE'];?>"><?=$phone['SUB_VALUES']['phone']['VALUE'];?></a>
+                                    <?php }
+                                    ?>
                                 </div>
                             </div>
-                            <div class="hmb_col">
+                            <div class="hmb_col" id="mobile_navigation_bar-adress">
                                 <div class="hmb_col_title">Адрес</div>
-                                <div class="hmb_col_list">Волшебный адрес</div>
+                                <div class="hmb_col_list"><?=$_SERVER['template_settings']['adress']['VALUE'];?></div>
                             </div>
-                            <div class="hmb_col">
+                            <div class="hmb_col" id="mobile_navigation_bar-time_of_work">
                                 <div class="hmb_col_title">Режим работы</div>
                                 <div class="hmb_col_list">
-                                    В любое время
+                                    <?=$_SERVER['template_settings']['time_of_work']['VALUE'];?>
                                 </div>
                             </div>
-                            <div class="hmb_col">
+                            <div class="hmb_col" id="mobile_navigation_bar-social_links">
                                 <div class="hmb_col_title">Социальные сети</div>
                                 <div class="hmb_col_list">
-                                    <a target="_blank" href="#">Twitter</a>
-                                    <a target="_blank" href="#">Youtube</a>
-                                    <a target="_blank" href="#">ВКонтакте</a>
-                                    <a target="_blank" href="#">WhatsApp</a>
+                                    <?php
+                                    foreach($_SERVER['template_settings']['social_links']['VALUE'] as $social_link){ ?>
+                                        <a href="<?=$social_link['SUB_VALUES']['social_link']['VALUE'];?>"><img src="<?=CFile::GetPath($social_link['SUB_VALUES']['social_link_icon']['VALUE']);;?>" alt=""></a>
+                                    <?php }
+                                    ?>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="hmb_btns container mt-2">
-                        <div class="hmb_btn" onclick="">Заказать звонок</div>
                     </div>
                 </div>
             </div>
@@ -150,20 +169,20 @@ echo '</pre>';*/
                     <div class="col-lg-9">
                         <?php
                             $APPLICATION->IncludeComponent("bitrix:menu", "main_menu", Array(
-	"ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
-		"CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
-		"DELAY" => "N",	// Откладывать выполнение шаблона меню
-		"MAX_LEVEL" => "1",	// Уровень вложенности меню
-		"MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
-		"MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
-		"MENU_CACHE_TYPE" => "N",	// Тип кеширования
-		"MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
-		"ROOT_MENU_TYPE" => "main",	// Тип меню для первого уровня
-		"USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
-		"COMPONENT_TEMPLATE" => ".default"
-	),
-	false
-);
+                                "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+                                    "CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
+                                    "DELAY" => "N",	// Откладывать выполнение шаблона меню
+                                    "MAX_LEVEL" => "1",	// Уровень вложенности меню
+                                    "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+                                    "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+                                    "MENU_CACHE_TYPE" => "N",	// Тип кеширования
+                                    "MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
+                                    "ROOT_MENU_TYPE" => "main",	// Тип меню для первого уровня
+                                    "USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+                                    "COMPONENT_TEMPLATE" => ".default"
+                                ),
+                                false
+                            );
                             ?>
                     </div>
                     <div class="col-lg-1">
