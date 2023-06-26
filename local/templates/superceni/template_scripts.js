@@ -34,17 +34,41 @@ $(document).ready(function(){
     });
 
     let adresses = [];
-    $.ajax({
-        url: '/get_map_data.php',
-        method: 'get',
-        dataType: 'json',
-        success: function(data){
-            adresses = data;
-        }
-    });
 
     //Загружаем карту
     ymaps.ready(function () {
+        //создаем точки по элементам
+        function createDealersOnMap() {
+            myMap.geoObjects.removeAll();
+            $('input[type=radio][name=coord]').removeAttr('checked');
+            $.each(adresses,function () {
+                if( this.is_point == true ){
+                    coord = this;
+                    coord = coord.coordinates.split(',');
+                    adr = coord.name;
+                    var myPlace = new ymaps.Placemark(
+                        [coord[0], coord[1]],
+                        {balloonContent: adr},
+                        {
+                            balloonPanelMaxMapArea: 0,
+                            preset: 'islands#darkOrangeDotIcon'
+                        }
+                    );
+                    myMap.geoObjects.add(myPlace);
+                }
+            });
+        }
+        $.ajax({
+            url: '/get_map_data.php',
+            method: 'get',
+            dataType: 'json',
+            success: function(data){
+                adresses = data;
+
+                createDealersOnMap();
+            }
+        });
+
         //рисуем карту
         var coordinate = "54.710162, 20.510137";
         var myMap = new ymaps.Map("sidemap", {
@@ -77,137 +101,84 @@ $(document).ready(function(){
         });
 
 
-        let counter_1 = 0;
-        let counter_2 = 0;
+        $('#list_of_adreses>#list_of_none_points>ul>li').click(function(){
+            if($(this).attr('data-parent') == undefined){
+                let parent_id = $(this).attr('data-id');
 
-        let _to; let block_to;
-        $.each(adresses,function (i) {
-            if(this.is_point == false){
-                $('#list_of_adreses>#list_of_none_points>ul').append(`
-                        <li data-coord="${this.coordinates}" data-id="${this.id}">${this.name}</li>
-                    `).on('click', 'li' , function() {
-                    let parent_id = $(this).attr('data-id');
+                $('#map  #list_of_adreses>#list_of_none_points').removeClass('show');
+                $('#map  #list_of_adreses>#list_of_none_points').hide();
 
-                    $('#map  #list_of_adreses>#list_of_none_points').removeClass('show');
-                    $('#map  #list_of_adreses>#list_of_none_points').hide();
+                $('#map  #list_of_adreses>#list_of_points').addClass('show');
+                $('#map  #list_of_adreses>#list_of_points').fadeIn();
 
-                    $('#map  #list_of_adreses>#list_of_points').addClass('show');
-                    $('#map  #list_of_adreses>#list_of_points').fadeIn();
-
-                    $.each($('#map  #list_of_adreses>#list_of_points li'),function(){
-                        if( $(this).attr('data-parent') != parent_id ) $(this).hide();
-                        else $(this).show();
-                    });
+                $.each($('#map  #list_of_adreses>#list_of_points li'),function(){
+                    if( $(this).attr('data-parent') != parent_id ) $(this).hide();
+                    else $(this).show();
                 });
             }
-            else{
-                $('#list_of_adreses>#list_of_points>ul').append(`
-                        <li data-coord="${this.coordinates}" data-parent="${this.parent}" data-adress="${this.adress}" data-phone="${this.phone}" data-time_of_work="${this.time_of_work}">${this.name}</li>
-                    `).on('click','li',function(){
-                    myMap.geoObjects.removeAll();
+        });
+        $('#list_of_adreses>#list_of_points>ul>li').click(function(){
+            myMap.geoObjects.removeAll();
 
-                    coord = $(this).attr('data-coord');
-                    coord = coord.split(',');
-                    adr = $(this).val();
+            coord = $(this).attr('data-coord');
+            coord = coord.split(',');
+            adr = $(this).val();
 
-                    var myPlace = new ymaps.Placemark(
-                        [coord[0], coord[1]],
-                        {balloonContent: adr},
-                        {
-                            balloonPanelMaxMapArea: 0,
-                            preset: 'islands#darkOrangeDotIcon'
-                        }
-                    );
-                    myMap.geoObjects.add(myPlace);
-
-                    $('#map  #list_of_adreses>#list_of_points').hide();
-                    $('#map  #list_of_adreses>#list_of_none_points').show();
-
-                    $('#map  #list_of_adreses>#list_of_none_points').addClass('show');
-                    $('#map  #list_of_adreses>#list_of_points').removeClass('show');
-
-                    $('#map  #list_of_adreses').removeClass('show');
-
-                    myMap.setCenter(coord);
-
-                    if( $("#shop_data-name").length > 0 ){
-                        $("#shop_data-name")[0].innerText = $(this)[0].innerText.split(',').join(', ');
-                        $('#shop_data-adress')[0].innerHTML = `<span>Адрес:</span> `+$(this).attr('data-adress');
-                        $('#shop_data-time_of_work')[0].innerHTML = `<span>Время работы:</span> `+$(this).attr('data-time_of_work');
-                        $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> `+$(this).attr('data-phone');
-                    }
-                });
-
-
-
-
-
-                //Актуально для страницы Магазины
-                if( this.parent == 1 ) {
-                    counter_1++;
-                    _to = (counter_1 % 2 != 0) ? 1 : 2;
-                    block_to = 1;
+            var myPlace = new ymaps.Placemark(
+                [coord[0], coord[1]],
+                {balloonContent: adr},
+                {
+                    balloonPanelMaxMapArea: 0,
+                    preset: 'islands#darkOrangeDotIcon'
                 }
-                else if (this.parent == 2 ){
-                    counter_2++;
-                    _to = (counter_2 % 2 != 0) ? 1 : 2;
-                    block_to = 2;
-                }
-                if( this.parent == 0 || this.parent == 1 ){
-                    $('#collapse'+block_to+' ul.list_'+_to).append(`
-                            <li data-coord="${this.coordinates}" data-parent="${this.parent}" data-adress="${this.adress}" data-phone="${this.phone}" data-time_of_work="${this.time_of_work}">${this.name}</li>
-                        `).on('click','li',function(){
-                        myMap.geoObjects.removeAll();
+            );
+            myMap.geoObjects.add(myPlace);
 
-                        coord = $(this).attr('data-coord');
-                        coord = coord.split(',');
-                        adr = $(this).val();
+            $('#map  #list_of_adreses>#list_of_points').hide();
+            $('#map  #list_of_adreses>#list_of_none_points').show();
 
-                        var myPlace = new ymaps.Placemark(
-                            [coord[0], coord[1]],
-                            {balloonContent: adr},
-                            {
-                                balloonPanelMaxMapArea: 0,
-                                preset: 'islands#darkOrangeDotIcon'
-                            }
-                        );
-                        myMap.geoObjects.add(myPlace);
+            $('#map  #list_of_adreses>#list_of_none_points').addClass('show');
+            $('#map  #list_of_adreses>#list_of_points').removeClass('show');
 
-                        myMap.setCenter(coord);
-                        if( $("#shop_data-name").length > 0 ) {
-                            $("#shop_data-name")[0].innerText = $(this)[0].innerText.split(',').join(', ');
-                            $('#shop_data-adress')[0].innerHTML = `<span>Адрес:</span> ` + $(this).attr('data-adress');
-                            $('#shop_data-time_of_work')[0].innerHTML = `<span>Время работы:</span> ` + $(this).attr('data-time_of_work');
-                            $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> ` + $(this).attr('data-phone');
-                        }
-                    });
-                }
+            $('#map  #list_of_adreses').removeClass('show');
+
+            myMap.setCenter(coord);
+
+            if( $("#shop_data-name").length > 0 ){
+                $("#shop_data-name")[0].innerText = $(this)[0].innerText.split(',').join(', ');
+                $('#shop_data-adress')[0].innerHTML = `<span>Адрес:</span> `+$(this).attr('data-adress');
+                $('#shop_data-time_of_work')[0].innerHTML = `<span>Время работы:</span> `+$(this).attr('data-time_of_work');
+                $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> `+$(this).attr('data-phone');
             }
         })
 
-        //создаем точки по элементам
-        function createDealersOnMap() {
-            myMap.geoObjects.removeAll();
-            $('input[type=radio][name=coord]').removeAttr('checked');
-            $.each(adresses,function () {
-                if( this.is_point == true ){
-                    coord = this;
-                    coord = coord.coordinates.split(',');
-                    adr = coord.name;
-                    var myPlace = new ymaps.Placemark(
-                        [coord[0], coord[1]],
-                        {balloonContent: adr},
-                        {
-                            balloonPanelMaxMapArea: 0,
-                            preset: 'islands#darkOrangeDotIcon'
-                        }
-                    );
-                    myMap.geoObjects.add(myPlace);
-                }
-            });
-        }
 
-        createDealersOnMap();
+        $('.accordion-collapse ul>li').click(function(){
+            myMap.geoObjects.removeAll();
+
+            coord = $(this).attr('data-coord');
+            coord = coord.split(',');
+            adr = $(this).val();
+
+            var myPlace = new ymaps.Placemark(
+                [coord[0], coord[1]],
+                {balloonContent: adr},
+                {
+                    balloonPanelMaxMapArea: 0,
+                    preset: 'islands#darkOrangeDotIcon'
+                }
+            );
+            myMap.geoObjects.add(myPlace);
+
+            myMap.setCenter(coord);
+            if( $("#shop_data-name").length > 0 ) {
+                $("#shop_data-name")[0].innerText = $(this)[0].innerText.split(',').join(', ');
+                $('#shop_data-adress')[0].innerHTML = `<span>Адрес:</span> ` + $(this).attr('data-adress');
+                $('#shop_data-time_of_work')[0].innerHTML = `<span>Время работы:</span> ` + $(this).attr('data-time_of_work');
+                $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> ` + $(this).attr('data-phone');
+            }
+        });
+
     });
 
     $('#map #map-navigation>#show_list_of_adreses').click(function(){

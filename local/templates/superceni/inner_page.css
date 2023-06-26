@@ -22,6 +22,7 @@
     font-size: 18px;
 }
 .accordion .accordion-button:focus{
+    -webkit-box-shadow: none;
     box-shadow: none;
 }
 .webform p.h4{
@@ -31,6 +32,8 @@
     font-size: 16px;
 }
 .webform svg{
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
     transform: rotate(90deg);
     width: 100%;
 }
@@ -40,6 +43,18 @@
 }
 .webform-form input,.webform-form textarea{
     border-color: #8B8B8B;
+}
+.webform-form input::-webkit-input-placeholder, .webform-form textarea::-webkit-input-placeholder{
+    color: #DBDBDB;
+}
+.webform-form input::-moz-placeholder, .webform-form textarea::-moz-placeholder{
+    color: #DBDBDB;
+}
+.webform-form input:-ms-input-placeholder, .webform-form textarea:-ms-input-placeholder{
+    color: #DBDBDB;
+}
+.webform-form input::-ms-input-placeholder, .webform-form textarea::-ms-input-placeholder{
+    color: #DBDBDB;
 }
 .webform-form input::placeholder,.webform-form textarea::placeholder{
     color: #DBDBDB;
@@ -58,6 +73,7 @@
     background-color: #F8F8F8;
 
     color: black;
+    -webkit-box-shadow: none;
     box-shadow: none;
 }
 #shops_map .bordered_data{
@@ -114,6 +130,8 @@
 }
 @media(min-width: 1200px){
     .webform svg{
+        -webkit-transform: rotate(0);
+        -ms-transform: rotate(0);
         transform: rotate(0);
     }
 }

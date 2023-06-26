@@ -11,6 +11,67 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+
+if (CModule::IncludeModule('iblock')) {
+    $arFilter = array('IBLOCK_ID' => 6);
+    $arSelect = array('IBLOCK_ID', 'ID', 'NAME', 'UF_COORDINATES');
+
+    $map_data = [];
+
+    $rsSect = CIBlockSection::GetList(
+        array("SORT" => "ASC"), //сортировка
+        $arFilter, //фильтр (выше объявили)
+        false, //выводить количество элементов - нет
+        $arSelect //выборка вывода, нам нужно только название, описание, картинка
+    );
+    while ($arSect = $rsSect->GetNext()) {
+        $map_data[] = [
+            'name' => htmlspecialchars_decode($arSect['NAME']),
+            'id' => $arSect['ID'],
+            'coordinates' => $arSect['UF_COORDINATES'],
+            'is_point' => false
+        ];
+    }
+
+
+    $arSelect = array("IBLOCK_ID", "ID", "NAME", "IBLOCK_SECTION_ID", "adress", "coordinates", "time_of_work", "phone");
+    $arFilter = array("IBLOCK_ID" => '6');
+    $res = CIBlockElement::GetList(array("SORT" => "ASC"), $arFilter, false, false, $arSelect);
+
+
+    while ($ob = $res->GetNextElement()) {
+        $map_fields = $ob->GetFields();
+        $map = $ob->GetProperties();
+
+        $map_data[] = [
+            'name' => htmlspecialchars_decode($map_fields['NAME']),
+            'coordinates' => $map['coordinates']['VALUE'],
+            'parent' => $map_fields['IBLOCK_SECTION_ID'],
+            'adress' => $map['adress']['VALUE'],
+            'time_of_work' => $map['time_of_work']['VALUE'],
+            'phone' => $map['phone']['VALUE'],
+            'is_point' => true
+        ];
+    }
+}
+
+$counter_1 = 0;
+$counter_2 = 0;
+$counter_3 = 0;
+$counter_4 = 0;
+
+/*if( this.parent == 1 ) {
+    counter_1++;
+    _to = (counter_1 % 2 != 0) ? 1 : 2;
+    block_to = 1;
+}
+else if (this.parent == 2 ){
+    counter_2++;
+    _to = (counter_2 % 2 != 0) ? 1 : 2;
+    block_to = 2;
+}
+if( this.parent == 0 || this.parent == 1 ){
+$('#collapse'+block_to+' ul.list_'+_to).append(`*/
 ?>
 
 <div class="row ms-0 me-0" id="shops_map">
@@ -33,10 +94,30 @@ $this->setFrameMode(true);
                                 <div class="bordered_data row ms-0 me-0 pt-3">
                                     <div class="col-12 col-md-6 ps-0">
                                         <ul class="p-0 m-0 list_1">
+                                            <?php
+                                                foreach ($map_data as $map_data_point){
+                                                    if( $map_data_point['parent'] == 1 ){
+                                                        if($counter_1 % 2 == 0){ $counter_1++; ?>
+                                                            <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                        <?php }
+                                                    }
+                                                    ?>
+                                                <?php }
+                                            ?>
                                         </ul>
                                     </div>
                                     <div class="col-12 col-md-6 ps-0 pe-0">
                                         <ul class="p-0 m-0 list_2">
+                                            <?php
+                                            foreach ($map_data as $map_data_point){
+                                                if( $map_data_point['parent'] == 1 ){
+                                                    if($counter_2 % 2 != 0){ $counter_2++;?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    <?php }
+                                                }
+                                                ?>
+                                            <?php }
+                                            ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -68,10 +149,30 @@ $this->setFrameMode(true);
                                 <div class="bordered_data row ms-0 me-0 pt-3">
                                     <div class="col-12 col-md-6 ps-0">
                                         <ul class="p-0 m-0 list_1">
+                                            <?php
+                                            foreach ($map_data as $map_data_point){
+                                                if( $map_data_point['parent'] == 2 ){
+                                                    if($counter_3 % 2 == 0){ $counter_3++; ?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    <?php }
+                                                }
+                                                ?>
+                                            <?php }
+                                            ?>
                                         </ul>
                                     </div>
                                     <div class="col-12 col-md-6 ps-0 pe-0">
                                         <ul class="p-0 m-0 list_2">
+                                            <?php
+                                            foreach ($map_data as $map_data_point){
+                                                if( $map_data_point['parent'] == 2 ){
+                                                    if($counter_4 % 2 != 0){ $counter_4++; ?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    <?php }
+                                                }
+                                                ?>
+                                            <?php }
+                                            ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -97,8 +198,34 @@ $this->setFrameMode(true);
                 <div class="btn" id="show_list_of_adreses">Список адресов</div>
             </div>
             <div id="list_of_adreses">
-                <div id="list_of_none_points"><ul class="p-0 m-0"></ul></div>
-                <div id="list_of_points"><ul class="p-0 m-0"></ul></div>
+                <div id="list_of_none_points">
+                    <ul class="p-0 m-0">
+                        <?php
+                        foreach ($map_data as $map_data_point){
+                            if( $map_data_point['is_point'] != true ){
+                                 ?>
+                                    <li data-coord="<?=$map_data_point['coordinates'];?>" data-id="<?=$map_data_point['id'];?>"><?=$map_data_point['name'];?></li>
+                                <?php
+                            }
+                            ?>
+                        <?php }
+                        ?>
+                    </ul>
+                </div>
+                <div id="list_of_points">
+                    <ul class="p-0 m-0">
+                        <?php
+                        foreach ($map_data as $map_data_point){
+                            if( $map_data_point['is_point'] == true ){
+                                ?>
+                                <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                <?php
+                            }
+                            ?>
+                        <?php }
+                        ?>
+                    </ul>
+                </div>
 
                 <svg class="burger_icon active" viewBox="0 0 100 100" width="80" id="close_list">
                     <path class="top" d="m 30,33 h 40 c 0,0 8.5,-0.68551 8.5,10.375 0,8.292653 -6.122707,9.002293 -8.5,6.625 l -11.071429,-11.071429"></path>

@@ -16,18 +16,22 @@ if(CModule::IncludeModule('iblock')) {
     print_r($global_settings['logo_group']['VALUE']['SUB_VALUES']);
 echo '</pre>';*/
 
-
+function phone_formatter($string){
+    $string = implode('',explode(' ',$string));
+    $string = implode('',explode('(',$string));
+    $string = implode('',explode(')',$string));
+    return $string;
+}
 
 ?>
-    <html>
+<!doctype html>
+    <html lang="ru">
     <head>
         <?$APPLICATION->ShowHead();?>
         <title><?$APPLICATION->ShowTitle()?></title>
-
-        <meta charset="<?=SITE_CHARSET?>">
         <META NAME="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="format-detection" content="telephone=no">
         <link rel="shortcut icon" type="image/x-icon" href="<?=SITE_TEMPLATE_PATH?>/images/favicon.ico" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="theme-color" content="#3498db">
         <?CJSCore::Init(array("fx", "ajax", "window", "popup"));?>
         <?Asset::getInstance()->addCss("https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css");?>
@@ -61,8 +65,8 @@ echo '</pre>';*/
         <nav class="navbar navbar-expand-lg h-100 bg-transparent col-12">
             <div id="global_header-mobile_menu" class="row ms-0 me-0 h-100 d-lg-none col-12">
                 <div class="col-8 col-sm-5 h-100">
-                    <a id="global_header-logo_link" href="/">
-                        <img id="global_header-logo_img" src="<?=CFile::GetPath($_SERVER['template_settings']['logo_group']['VALUE']['SUB_VALUES']['logo_m']['VALUE']);?>" alt="Логотип">
+                    <a id="global_header-logo_link_m" href="/">
+                        <img id="global_header-logo_img_m" src="<?=CFile::GetPath($_SERVER['template_settings']['logo_group']['VALUE']['SUB_VALUES']['logo_m']['VALUE']);?>" alt="Логотип">
                     </a>
                 </div>
                 <div class="col-4 col-sm-7 h-100 p-0">
@@ -129,7 +133,7 @@ echo '</pre>';*/
                                 <div class="hmb_col_list">
                                     <?php
                                     foreach($_SERVER['template_settings']['phones']['VALUE'] as $phone){ ?>
-                                        <a href="tel:<?=$phone['SUB_VALUES']['phone']['VALUE'];?>"><?=$phone['SUB_VALUES']['phone']['VALUE'];?></a>
+                                        <a href="tel:<?=phone_formatter($phone['SUB_VALUES']['phone']['VALUE']);?>"><?=$phone['SUB_VALUES']['phone']['VALUE'];?></a>
                                     <?php }
                                     ?>
                                 </div>
@@ -161,28 +165,32 @@ echo '</pre>';*/
 
             <div id="global_header-main_menu" class="row ms-0 me-0 h-100 d-none d-lg-flex col-12 justify-content-between">
                 <div class="col-lg-3 h-100 d-flex align-items-center">
-                    <a id="global_header-logo_link" href="/">
+                    <a id="global_header-logo_link_d" href="/">
                         <img id="global_header-logo_img" src="<?=CFile::GetPath($_SERVER['template_settings']['logo_group']['VALUE']['SUB_VALUES']['logo']['VALUE']);?>" alt="Логотип">
                     </a>
                 </div>
                 <div class="col-lg-8 d-flex align-items-center justify-content-between" id="global_header-main_menu-navigation">
                     <div class="col-lg-9">
                         <?php
-                            $APPLICATION->IncludeComponent("bitrix:menu", "main_menu", Array(
-                                "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
-                                    "CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
-                                    "DELAY" => "N",	// Откладывать выполнение шаблона меню
-                                    "MAX_LEVEL" => "1",	// Уровень вложенности меню
-                                    "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
-                                    "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
-                                    "MENU_CACHE_TYPE" => "N",	// Тип кеширования
-                                    "MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
-                                    "ROOT_MENU_TYPE" => "main",	// Тип меню для первого уровня
-                                    "USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
-                                    "COMPONENT_TEMPLATE" => ".default"
-                                ),
-                                false
-                            );
+                            $APPLICATION->IncludeComponent(
+	"bitrix:menu",
+	"menu_with_subs",
+	array(
+		"ALLOW_MULTI_SELECT" => "N",
+		"CHILD_MENU_TYPE" => "left",
+		"DELAY" => "N",
+		"MAX_LEVEL" => "2",
+		"MENU_CACHE_GET_VARS" => array(
+		),
+		"MENU_CACHE_TIME" => "3600",
+		"MENU_CACHE_TYPE" => "N",
+		"MENU_CACHE_USE_GROUPS" => "Y",
+		"ROOT_MENU_TYPE" => "main",
+		"USE_EXT" => "N",
+		"COMPONENT_TEMPLATE" => "main_menu"
+	),
+	false
+);
                             ?>
                     </div>
                     <div class="col-lg-1">
@@ -212,7 +220,7 @@ echo '</pre>';*/
             <div class="col-lg-2">
                 <div id="hide_searcher">
                     <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
-                        <g id="Edit / Close_Circle">
+                        <g>
                             <path id="Vector" d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </g>
                     </svg>

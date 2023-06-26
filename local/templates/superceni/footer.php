@@ -121,7 +121,7 @@
             </div>
 
             <div class="col-12 d-none d-md-block d-xl-none order-4 d-xxl-none">
-                <div class="col-12 mt-3" id="global_footer-social_links">
+                <div class="col-12 mt-3" id="global_footer-social_links_md">
                     <div class="h5 m-0"><span>Мы в социальных сетях</span></div>
                     <div class="d-flex flex-row flex-wrap mt-2">
                         <?php
