@@ -3,7 +3,7 @@
 use local\templates\superceni\PHPMAILER\PHPMailer;
 use local\templates\superceni\PHPMAILER\Exception;
 
-echo 200;
+print_r($_POST);
 
 function custom_mail($to, $subject, $message, $additionalHeaders = '')
 {

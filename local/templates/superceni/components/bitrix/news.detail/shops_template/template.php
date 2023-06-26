@@ -140,10 +140,10 @@ $this->setFrameMode(true);
                                         <ul class="p-0 m-0 list_1">
                                             <?php
                                             foreach ($map_data as $map_data_point){
-                                                if( $map_data_point['is_point'] != true ){
-                                                    ?>
-                                                    <li data-coord="<?=$map_data_point['coordinates'];?>" data-id="<?=$map_data_point['id'];?>"><?=$map_data_point['name'];?></li>
-                                                    <?php
+                                                if( $map_data_point['parent'] == 2 ){
+                                                    if($counter_3 % 2 == 0){ $counter_3++; ?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    <?php }
                                                 }
                                                 ?>
                                             <?php }
@@ -154,10 +154,10 @@ $this->setFrameMode(true);
                                         <ul class="p-0 m-0 list_2">
                                             <?php
                                             foreach ($map_data as $map_data_point){
-                                                if( $map_data_point['is_point'] == true ){
-                                                    ?>
-                                                    <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
-                                                    <?php
+                                                if( $map_data_point['parent'] == 2 ){
+                                                    if($counter_4 % 2 != 0){ $counter_4++; ?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    <?php }
                                                 }
                                                 ?>
                                             <?php }

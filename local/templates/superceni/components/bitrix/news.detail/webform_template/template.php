@@ -36,34 +36,41 @@ $this->setFrameMode(true);
 
         <div class="col-12 col-xl-6 mt-5 mt-md-0">
             <form id="webform-form-<?=$arResult['ID'];?>" class="webform-form">
+                <input type="hidden" name="form_id" value="<?=$arResult['ID'];?>">
+                <input type="hidden" name="count_of_fields" value="<?=count($arResult['PROPERTIES']['form_fields']['VALUE']);?>">
                 <?php
                 foreach ($arResult['PROPERTIES']['form_fields']['VALUE'] as $key => $form_field){
                     if( $form_field['SUB_VALUES']['form_field_type']['VALUE_XML_ID'] == 'input' ){ ?>
                         <div class="mb-3">
+                            <input type="hidden" name="form_field_name_<?=$arResult['ID'];?>_<?=$key;?>" value="<?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?>">
                             <label for="form_field_<?=$arResult['ID'];?>_<?=$key;?>" class="form-label"><?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?></label>
                             <input type="text" class="form-control" id="form_field_<?=$arResult['ID'];?>_<?=$key;?>" name="form_field_<?=$arResult['ID'];?>_<?=$key;?>" placeholder="<?=$form_field['SUB_VALUES']['form_field_placeholder']['VALUE'];?>">
                         </div>
                     <?php }
                     else if( $form_field['SUB_VALUES']['form_field_type']['VALUE_XML_ID'] == 'textarea' ){ ?>
                         <div class="mb-3">
+                            <input type="hidden" name="form_field_name_<?=$arResult['ID'];?>_<?=$key;?>" value="<?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?>">
                             <label for="form_field_<?=$arResult['ID'];?>_<?=$key;?>" class="form-label"><?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?></label>
                             <textarea name="form_field_<?=$arResult['ID'];?>_<?=$key;?>" id="form_field_<?=$arResult['ID'];?>_<?=$key;?>" class="form-control" cols="30" rows="10" placeholder="<?=$form_field['SUB_VALUES']['form_field_placeholder']['VALUE'];?>"></textarea>
                         </div>
                     <?php }
                     else if( $form_field['SUB_VALUES']['form_field_type']['VALUE_XML_ID'] == 'bdate' ){ ?>
                         <div class="mb-3" style="max-width: 177px;">
+                            <input type="hidden" name="form_field_name_<?=$arResult['ID'];?>_<?=$key;?>" value="<?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?>">
                             <label for="form_field_<?=$arResult['ID'];?>_<?=$key;?>" class="form-label"><?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?></label>
-                            <input type="date" class="form-control" id="orm_field_<?=$arResult['ID'];?>_<?=$key;?>" name="orm_field_<?=$arResult['ID'];?>_<?=$key;?>" placeholder="<?=$form_field['SUB_VALUES']['form_field_placeholder']['VALUE'];?>">
+                            <input type="date" class="form-control" id="form_field_<?=$arResult['ID'];?>_<?=$key;?>" name="form_field_<?=$arResult['ID'];?>_<?=$key;?>" placeholder="<?=$form_field['SUB_VALUES']['form_field_placeholder']['VALUE'];?>">
                         </div>
                     <?php }
                     else if( $form_field['SUB_VALUES']['form_field_type']['VALUE_XML_ID'] == 'email' ){ ?>
                         <div class="mb-3" style="max-width: 177px;">
+                            <input type="hidden" name="form_field_name_<?=$arResult['ID'];?>_<?=$key;?>" value="<?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?>">
                             <label for="form_field_<?=$arResult['ID'];?>_<?=$key;?>" class="form-label"><?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?></label>
-                            <input type="email" class="form-control" id="orm_field_<?=$arResult['ID'];?>_<?=$key;?>" name="orm_field_<?=$arResult['ID'];?>_<?=$key;?>" placeholder="<?=$form_field['SUB_VALUES']['form_field_placeholder']['VALUE'];?>">
+                            <input type="email" class="form-control" id="form_field_<?=$arResult['ID'];?>_<?=$key;?>" name="form_field_<?=$arResult['ID'];?>_<?=$key;?>" placeholder="<?=$form_field['SUB_VALUES']['form_field_placeholder']['VALUE'];?>">
                         </div>
                     <?php }
                     else if( $form_field['SUB_VALUES']['form_field_type']['VALUE_XML_ID'] == 'tel' ){ ?>
                         <div class="mb-3" style="max-width: 177px;">
+                            <input type="hidden" name="form_field_name_<?=$arResult['ID'];?>_<?=$key;?>" value="<?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?>">
                             <label for="form_field_<?=$arResult['ID'];?>_<?=$key;?>" class="form-label"><?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?></label>
                             <input type="tel" class="form-control" id="form_field_<?=$arResult['ID'];?>_<?=$key;?>" name="form_field_<?=$arResult['ID'];?>_<?=$key;?>" placeholder="<?=$form_field['SUB_VALUES']['form_field_placeholder']['VALUE'];?>">
                         </div>
@@ -72,7 +79,7 @@ $this->setFrameMode(true);
                 ?>
 
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="form_check">
+                    <input type="checkbox" class="form-check-input" id="form_check" name="checkbox">
                     <label class="form-check-label" for="form_check">Нажимая кнопку «Отправить», я даю свое согласие на обработку моих персональных данных, в соответствии с Федеральным законом от 27.07.2006 года №152-ФЗ «О персональных данных», на условиях и для целей, определенных в Согласии на обработку персональных данных</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Отправить анкету</button>
@@ -90,6 +97,7 @@ $this->setFrameMode(true);
             showConfirmButton: false,
             timer: 3000
         });
+
         $('#webform-form-<?=$arResult['ID'];?>').submit(function(e){
             e.preventDefault();
 
@@ -97,6 +105,7 @@ $this->setFrameMode(true);
                 url: '/send_web_form.php',
                 method: 'post',
                 dataType: 'json',
+                data: $('#webform-form-<?=$arResult['ID'];?>').serialize(),
                 success: function(data){
                     $('#webform-form-<?=$arResult['ID'];?>').trigger("reset");
 
