@@ -201,4 +201,17 @@ $(document).ready(function(){
             $('#map  #list_of_adreses>#list_of_points').removeClass('show');
         }
     });
+
+    let sub_open = false;
+
+    $('body #global_header #mobile_navigation_bar .multilevel_custom_menu>ul>li.dropdown>.like_link').click(function(e){
+        e.preventDefault();
+        $($(this)[0].parentElement).addClass('active_sub');
+    });
+
+    $('body #global_header #mobile_navigation_bar .multilevel_custom_menu>ul>li .bx_children_container .backstep').click(function(e){
+        e.preventDefault();
+
+        $($(this)[0].offsetParent.parentElement).removeClass('active_sub');
+    });
 });
