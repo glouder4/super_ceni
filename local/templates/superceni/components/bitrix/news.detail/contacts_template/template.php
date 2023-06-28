@@ -34,7 +34,7 @@ if (CModule::IncludeModule('iblock')) {
     }
 
 
-    $arSelect = array("IBLOCK_ID", "ID", "NAME", "IBLOCK_SECTION_ID", "adress", "coordinates", "time_of_work", "phone");
+    $arSelect = array("IBLOCK_ID", "ID", "NAME", "IBLOCK_SECTION_ID", "adress", "coordinates", "time_of_work", "phone","DETAIL_PICTURE");
     $arFilter = array("IBLOCK_ID" => '6');
     $res = CIBlockElement::GetList(array("SORT" => "ASC"), $arFilter, false, false, $arSelect);
 
@@ -50,15 +50,30 @@ if (CModule::IncludeModule('iblock')) {
             'adress' => $map['adress']['VALUE'],
             'time_of_work' => $map['time_of_work']['VALUE'],
             'phone' => $map['phone']['VALUE'],
+            'picture' => CFile::GetPath($map_fields['DETAIL_PICTURE']),
             'is_point' => true
         ];
     }
 }
 
+$column_key_1 = 0; $column_key_2 = 0;
+foreach ($map_data as $key => $map_data_point){
+    if( $map_data_point['parent'] == 1 ){
+        $map_data[$key]['column'] = $column_key_1;
+        if( $column_key_1 == 0 ) $column_key_1 = 1;
+        else $column_key_1 = 0;
+    }
+    if( $map_data_point['parent'] == 2 ){
+        $map_data[$key]['column'] = $column_key_2;
+        if( $column_key_2 == 0 ) $column_key_2 = 1;
+        else $column_key_2 = 0;
+    }
+}
+
 $counter_1 = 0;
-$counter_2 = 0;
+$counter_2 = 1;
 $counter_3 = 0;
-$counter_4 = 0;
+$counter_4 = 1;
 
 /*if( this.parent == 1 ) {
     counter_1++;
@@ -95,10 +110,10 @@ $('#collapse'+block_to+' ul.list_'+_to).append(`*/
                                     <div class="col-12 col-md-6 ps-0">
                                         <ul class="p-0 m-0 list_1">
                                             <?php
-                                                foreach ($map_data as $map_data_point){
+                                                foreach ($map_data as $key => $map_data_point){
                                                     if( $map_data_point['parent'] == 1 ){
-                                                        if($counter_1 % 2 == 0){ $counter_1++; ?>
-                                                            <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                        if($map_data_point['column'] == 0){ $counter_1++; ?>
+                                                            <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>" data-picture="<?=$map_data_point['picture'];?>"><?=$map_data_point['name'];?></li>
                                                         <?php }
                                                     }
                                                     ?>
@@ -109,10 +124,10 @@ $('#collapse'+block_to+' ul.list_'+_to).append(`*/
                                     <div class="col-12 col-md-6 ps-0 pe-0">
                                         <ul class="p-0 m-0 list_2">
                                             <?php
-                                            foreach ($map_data as $map_data_point){
+                                            foreach ($map_data as $key => $map_data_point){
                                                 if( $map_data_point['parent'] == 1 ){
-                                                    if($counter_2 % 2 != 0){ $counter_2++;?>
-                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    if($map_data_point['column'] == 1){ $counter_2++;?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>" data-picture="<?=$map_data_point['picture'];?>"><?=$map_data_point['name'];?></li>
                                                     <?php }
                                                 }
                                                 ?>
@@ -150,10 +165,10 @@ $('#collapse'+block_to+' ul.list_'+_to).append(`*/
                                     <div class="col-12 col-md-6 ps-0">
                                         <ul class="p-0 m-0 list_1">
                                             <?php
-                                            foreach ($map_data as $map_data_point){
+                                            foreach ($map_data as $key => $map_data_point){
                                                 if( $map_data_point['parent'] == 2 ){
-                                                    if($counter_3 % 2 == 0){ $counter_3++; ?>
-                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    if($map_data_point['column'] == 0){ $counter_3++; ?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>" data-picture="<?=$map_data_point['picture'];?>"><?=$map_data_point['name'];?></li>
                                                     <?php }
                                                 }
                                                 ?>
@@ -164,10 +179,10 @@ $('#collapse'+block_to+' ul.list_'+_to).append(`*/
                                     <div class="col-12 col-md-6 ps-0 pe-0">
                                         <ul class="p-0 m-0 list_2">
                                             <?php
-                                            foreach ($map_data as $map_data_point){
+                                            foreach ($map_data as $key => $map_data_point){
                                                 if( $map_data_point['parent'] == 2 ){
-                                                    if($counter_4 % 2 != 0){ $counter_4++; ?>
-                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    if($map_data_point['column'] == 1){ $counter_4++; ?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>" data-picture="<?=$map_data_point['picture'];?>"><?=$map_data_point['name'];?></li>
                                                     <?php }
                                                 }
                                                 ?>
@@ -183,7 +198,7 @@ $('#collapse'+block_to+' ul.list_'+_to).append(`*/
 
                 <div class="col-12 col-md-12 mt-5">
                     <div class="col-12 p-0 mx-auto">
-                        <img src="<?=$arResult['DETAIL_PICTURE']['SRC']?>" alt="">
+                        <img id="shop_data-picture" src="<?=$arResult['DETAIL_PICTURE']['SRC']?>" alt="">
                     </div>
                 </div>
             </div>
@@ -218,7 +233,7 @@ $('#collapse'+block_to+' ul.list_'+_to).append(`*/
                         foreach ($map_data as $map_data_point){
                             if( $map_data_point['is_point'] == true ){
                                 ?>
-                                <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>" data-picture="<?=$map_data_point['picture'];?>"><?=$map_data_point['name'];?></li>
                                 <?php
                             }
                             ?>

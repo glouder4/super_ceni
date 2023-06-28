@@ -95,7 +95,7 @@
             </div>
             <div class="col-12 order-3 col-md-7 order-md-2 col-xxl-3 order-xxl-3 pe-xxl-0 mt-4 mt-md-0">
                 <div class="col-12 p-0 col-xxl-10 ms-xxl-auto">
-                    <div id="global_footer-searcher" class="col-12">
+                    <div id="global_footer-searcher" class="col-12 d-none">
                         <?$APPLICATION->IncludeComponent(
                             "bitrix:search.form",
                             "footer_searcher",
@@ -107,9 +107,9 @@
                             false
                         );?>
                     </div>
-                    <div class="col-12 mt-3 d-md-none d-xxl-block mt-xxl-4" id="global_footer-social_links">
+                    <div class="col-12 mt-3 mt-lg-0 d-md-none d-xxl-block mt-xxl-0" id="global_footer-social_links">
                         <div class="h5 m-0"><span>Мы в социальных сетях</span></div>
-                        <div class="d-flex flex-row flex-wrap mt-2">
+                        <div class="d-flex flex-row flex-wrap mt-2 mt-lg-0">
                             <?php
                                 foreach($_SERVER['template_settings']['social_links']['VALUE'] as $social_link){ ?>
                                     <a href="<?=$social_link['SUB_VALUES']['social_link']['VALUE'];?>"><img src="<?=CFile::GetPath($social_link['SUB_VALUES']['social_link_icon']['VALUE']);;?>" alt=""></a>
@@ -120,10 +120,10 @@
                 </div>
             </div>
 
-            <div class="col-12 d-none d-md-block d-xl-none order-4 d-xxl-none">
-                <div class="col-12 mt-3" id="global_footer-social_links_md">
+            <div class="col-12 d-none d-md-block d-xxl-none order-4 d-xxl-none">
+                <div class="col-12 mt-3 mt-lg-0" id="global_footer-social_links_md">
                     <div class="h5 m-0"><span>Мы в социальных сетях</span></div>
-                    <div class="d-flex flex-row flex-wrap mt-2">
+                    <div class="d-flex flex-row flex-wrap mt-2 mt-lg-0">
                         <?php
                         foreach($_SERVER['template_settings']['social_links']['VALUE'] as $social_link){ ?>
                             <a href="<?=$social_link['SUB_VALUES']['social_link']['VALUE'];?>"><img src="<?=CFile::GetPath($social_link['SUB_VALUES']['social_link_icon']['VALUE']);;?>" alt=""></a>

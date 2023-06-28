@@ -9,7 +9,7 @@ $APPLICATION->SetTitle("1С-Битрикс: Управление сайтом");
             <h1>Супер Цены и Секлея</h1>
             <p>розничная сеть , состоящая из 26 универсальных <br> магазинов на территории Калининградской области, <br> а также 5 в Краснодарском крае.</p>
 
-            <a href="#" rel="nofollow" class="btn">Подробнее</a>
+            <a href="/pokupatelyam/shops.php" rel="nofollow" class="btn">Подробнее</a>
         </div>
     </div>
 </section>
@@ -25,8 +25,8 @@ $APPLICATION->SetTitle("1С-Битрикс: Управление сайтом");
             <div class="row ms-0 me-0 mt-3">
                 <?php
                     foreach ($_SERVER['template_settings']['about_company_number']['VALUE'] as $key => $about_settings){ ?>
-                        <div class="col-12 col-sm-6 col-md-4 about_us-item text-center">
-                            <div class="col-9 col-md-11 mx-auto d-flex flex-column flex-md-row pt-5 pb-5">
+                        <div class="col-<?=($key > 1) ? '12' : '6'?> col-sm-6 col-md-4 about_us-item text-center">
+                            <div class="col-<?=($key > 1) ? '9' : '12'?> col-md-11 mx-auto d-flex flex-column flex-md-row pt-2 pb-2 pt-lg-5 pb-lg-5">
                                 <div class="d-flex flex-row justify-content-center align-items-center">
                                     <span><?=$_SERVER['template_settings']['about_company_number']['VALUE'][$key]?></span>
                                     <p class="text-start m-0"><?=$_SERVER['template_settings']['about_company_text']['~VALUE'][$key]?></p>
@@ -63,7 +63,7 @@ $APPLICATION->SetTitle("1С-Битрикс: Управление сайтом");
                     foreach ($slider['main_slider']['VALUE'] as $key => $slider_item){ $slider_item = $slider_item['SUB_VALUES']; ?>
                         <div class="carousel-item <?=($key == 0) ? 'active' : '';?>" data-bg="<?=CFile::GetPath($slider_item['main_slider_slide']['VALUE']);?>" data-m_bg="<?=CFile::GetPath($slider_item['main_slider_m_slide']['VALUE']);?>" style="background-image: url('<?=CFile::GetPath($slider_item['main_slider_slide']['VALUE']);?>');">
                             <div class="slide_data col-12 col-xxl-6">
-                                <div class="slide_counter"><?=($key+1 < 10) ? '0'.($key+1) : ($key+1) ; ?> / <span><?=(count($slider['main_slider']['VALUE']) < 10 ) ? '0'.count($slider['main_slider']['VALUE']) : count($slider['main_slider']['VALUE'])?></span></div>
+                                <div class="slide_counter d-none d-md-block"><?=($key+1 < 10) ? '0'.($key+1) : ($key+1) ; ?> / <span><?=(count($slider['main_slider']['VALUE']) < 10 ) ? '0'.count($slider['main_slider']['VALUE']) : count($slider['main_slider']['VALUE'])?></span></div>
                                 <div class="slide_title mt-2 mt-md-0">
                                     <h4><?=$slider_item['main_slider_title']['VALUE'];?></h4>
                                 </div>

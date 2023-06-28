@@ -42,7 +42,7 @@ $this->setFrameMode(true);
         }
 
 
-        $arSelect = array("IBLOCK_ID", "ID", "NAME", "IBLOCK_SECTION_ID", "adress", "coordinates", "time_of_work", "phone");
+        $arSelect = array("IBLOCK_ID", "ID", "NAME", "IBLOCK_SECTION_ID", "adress", "coordinates", "time_of_work", "phone",'DETAIL_PICTURE');
         $arFilter = array("IBLOCK_ID" => '6');
         $res = CIBlockElement::GetList(array("SORT" => "ASC"), $arFilter, false, false, $arSelect);
 
@@ -58,8 +58,23 @@ $this->setFrameMode(true);
                 'adress' => $map['adress']['VALUE'],
                 'time_of_work' => $map['time_of_work']['VALUE'],
                 'phone' => $map['phone']['VALUE'],
+                'picture' => CFile::GetPath($map_fields['DETAIL_PICTURE']),
                 'is_point' => true
             ];
+        }
+    }
+
+    $column_key_1 = 0; $column_key_2 = 0;
+    foreach ($map_data as $key => $map_data_point){
+        if( $map_data_point['parent'] == 1 ){
+            $map_data[$key]['column'] = $column_key_1;
+            if( $column_key_1 == 0 ) $column_key_1 = 1;
+            else $column_key_1 = 0;
+        }
+        if( $map_data_point['parent'] == 2 ){
+            $map_data[$key]['column'] = $column_key_2;
+            if( $column_key_2 == 0 ) $column_key_2 = 1;
+            else $column_key_2 = 0;
         }
     }
 
@@ -86,8 +101,8 @@ $this->setFrameMode(true);
                                             <?php
                                             foreach ($map_data as $map_data_point){
                                                 if( $map_data_point['parent'] == 1 ){
-                                                    if($counter_1 % 2 == 0){ $counter_1++; ?>
-                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    if($map_data_point['column'] == 0){ $counter_1++; ?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>" data-picture="<?=$map_data_point['picture'];?>"><?=$map_data_point['name'];?></li>
                                                     <?php }
                                                 }
                                                 ?>
@@ -100,8 +115,8 @@ $this->setFrameMode(true);
                                             <?php
                                             foreach ($map_data as $map_data_point){
                                                 if( $map_data_point['parent'] == 1 ){
-                                                    if($counter_2 % 2 != 0){ $counter_2++;?>
-                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    if($map_data_point['column'] == 1){ $counter_2++;?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>" data-picture="<?=$map_data_point['picture'];?>"><?=$map_data_point['name'];?></li>
                                                     <?php }
                                                 }
                                                 ?>
@@ -141,8 +156,8 @@ $this->setFrameMode(true);
                                             <?php
                                             foreach ($map_data as $map_data_point){
                                                 if( $map_data_point['parent'] == 2 ){
-                                                    if($counter_3 % 2 == 0){ $counter_3++; ?>
-                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    if($map_data_point['column'] == 0){ $counter_3++; ?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>" data-picture="<?=$map_data_point['picture'];?>"><?=$map_data_point['name'];?></li>
                                                     <?php }
                                                 }
                                                 ?>
@@ -155,8 +170,8 @@ $this->setFrameMode(true);
                                             <?php
                                             foreach ($map_data as $map_data_point){
                                                 if( $map_data_point['parent'] == 2 ){
-                                                    if($counter_4 % 2 != 0){ $counter_4++; ?>
-                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                                    if($map_data_point['column'] == 1){ $counter_4++; ?>
+                                                        <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>" data-picture="<?=$map_data_point['picture'];?>"><?=$map_data_point['name'];?></li>
                                                     <?php }
                                                 }
                                                 ?>
@@ -172,7 +187,7 @@ $this->setFrameMode(true);
 
                 <div class="col-12 col-md-12 mt-5">
                     <div class="col-12 p-0 mx-auto">
-                        <img src="<?=$arResult['DETAIL_PICTURE']['SRC']?>" alt="">
+                        <img id="shop_data-picture" src="<?=$arResult['DETAIL_PICTURE']['SRC']?>" alt="">
                     </div>
                 </div>
             </div>
@@ -207,7 +222,7 @@ $this->setFrameMode(true);
                         foreach ($map_data as $map_data_point){
                             if( $map_data_point['is_point'] == true ){
                                 ?>
-                                <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"><?=$map_data_point['name'];?></li>
+                                <li data-coord="<?=$map_data_point['coordinates'];?>" data-parent="<?=$map_data_point['parent'];?>" data-adress="<?=$map_data_point['adress'];?>" data-phone="<?=$map_data_point['phone'];?>" data-time_of_work="<?=$map_data_point['time_of_work'];?>"  data-picture="<?=$map_data_point['picture'];?>"><?=$map_data_point['name'];?></li>
                                 <?php
                             }
                             ?>

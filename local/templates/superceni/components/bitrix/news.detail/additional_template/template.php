@@ -47,8 +47,8 @@ $this->setFrameMode(true);
                         <div class="row ms-0 me-0 mt-3">
                             <?php
                             foreach ($_SERVER['template_settings']['about_company_number']['VALUE'] as $key => $about_settings){ ?>
-                                <div class="col-12 col-sm-6 col-md-4 about_us-item text-center">
-                                    <div class="col-9 col-md-11 mx-auto d-flex flex-column flex-md-row pt-5 pb-5">
+                                <div class="col-<?=($key > 1) ? '12' : '6'?> col-sm-6 col-md-4 about_us-item text-center">
+                                    <div class="col-<?=($key > 1) ? '9' : '12'?> col-md-11 mx-auto d-flex flex-column flex-md-row pt-2 pb-2 pt-lg-5 pb-lg-5">
                                         <div class="d-flex flex-row justify-content-center align-items-center">
                                             <span><?=$_SERVER['template_settings']['about_company_number']['VALUE'][$key]?></span>
                                             <p class="text-start m-0"><?=$_SERVER['template_settings']['about_company_text']['~VALUE'][$key]?></p>
@@ -94,8 +94,8 @@ $this->setFrameMode(true);
 
     <?php
     if( $arResult['PROPERTIES']['show_product_categories']['VALUE_XML_ID'] == 'YES' ){ ?>
-        <section id="product_categories" class="mt-5">
-        <div class="container">
+        <section id="product_categories" class="mt-5 p-0">
+        <div class="container p-0">
             <div class="section_title row ms-0 me-0 mt-0">
                 <div class="col-12 col-md-6"><h2 class="text-center text-md-start">Товарные категории</h2></div>
             </div>
@@ -183,10 +183,10 @@ $this->setFrameMode(true);
             foreach ($arResult['PROPERTIES']['additional_info_group']['VALUE'] as $key => $additional_data){ ?>
 
                 <div class="mt-5 row ms-0 me-0 col-12 p-0">
-                    <div class="col-12 col-md-6 mt-5 mt-md-0 <?=($key%2 != 0) ? 'order-2' : 'order-1' ?>">
+                    <div class="col-12 col-md-6 mt-5 mt-md-0 <?=($key%2 != 0) ? 'order-2 mt-3 mt-md-0' : 'order-1' ?>">
                         <img src="<?=CFile::GetPath($additional_data['SUB_VALUES']['additional_info_picture']['VALUE']);?>" alt="">
                     </div>
-                    <div class="col-12 col-md-6 p-0 <?=($key%2 != 0) ? 'order-1' : 'order-2' ?>" id="additional_data-main_info">
+                    <div class="col-12 col-md-6 p-0 <?=($key%2 != 0) ? 'order-1' : 'order-2 mt-3 mt-md-0' ?>" id="additional_data-main_info">
                         <div class="col-12 col-md-11 <?=($key%2 != 0) ? 'me-auto' : 'ms-auto' ?>">
                             <h3 class="mt-0"><?=$additional_data['SUB_VALUES']['additional_info_title']['VALUE'];?></h3>
                             <?php

@@ -12,6 +12,51 @@ div.news-detail img.detail_picture
 	color:#486DAA;
 }
 
+.webform p.h4{
+	font-size: 16px;
+}
+.webform p{
+	font-size: 12px;
+}
+.webform svg{
+	-webkit-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
+	width: 100%;
+}
+.webform-form label{
+	font-size: 16px;
+	font-weight: 400;
+}
+.webform-form input,.webform-form textarea{
+	border-color: #8B8B8B;
+}
+.webform-form input::-webkit-input-placeholder, .webform-form textarea::-webkit-input-placeholder{
+	color: #DBDBDB;
+}
+.webform-form input::-moz-placeholder, .webform-form textarea::-moz-placeholder{
+	color: #DBDBDB;
+}
+.webform-form input:-ms-input-placeholder, .webform-form textarea:-ms-input-placeholder{
+	color: #DBDBDB;
+}
+.webform-form input::-ms-input-placeholder, .webform-form textarea::-ms-input-placeholder{
+	color: #DBDBDB;
+}
+.webform-form input::placeholder,.webform-form textarea::placeholder{
+	color: #DBDBDB;
+}
+.webform-form .form-check label{
+	font-size: 13px;
+}
+.webform-form button[type='submit'],#vakansii .btn{
+	background-color: #249D4D;
+	color: white;
+	font-size: 16px;
+	border: 0;
+	padding: 10px 40px;
+}
+
 #additional_data #additional_data-main_info h1{
 	font-size: 27px;
 	font-weight: 700;
@@ -20,12 +65,21 @@ div.news-detail img.detail_picture
 	font-size: 16px;
 	color: #545454;
 }
-
+@media(min-width: 1200px){
+	.webform svg{
+		-webkit-transform: rotate(0);
+		-ms-transform: rotate(0);
+		transform: rotate(0);
+	}
+}
 @media(min-width: 1520px){
 	#additional_data #additional_data-main_info h1{
 		font-size: 36px;
 	}
 	#additional_data #additional_data-main_info p{
 		font-size: 16px;
+	}
+	.webform p.h4{
+		font-size: 27px;
 	}
 }

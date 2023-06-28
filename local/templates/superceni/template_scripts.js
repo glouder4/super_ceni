@@ -176,6 +176,8 @@ $(document).ready(function(){
                 $('#shop_data-adress')[0].innerHTML = `<span>Адрес:</span> ` + $(this).attr('data-adress');
                 $('#shop_data-time_of_work')[0].innerHTML = `<span>Время работы:</span> ` + $(this).attr('data-time_of_work');
                 $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> ` + $(this).attr('data-phone');
+                $('#shop_data-picture').attr('src', $(this).attr('data-picture'));
+                //.css('background-image','url('+$(this).attr('data-m_bg')+')');
             }
         });
 

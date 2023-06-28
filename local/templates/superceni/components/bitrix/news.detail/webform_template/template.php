@@ -51,7 +51,7 @@ $this->setFrameMode(true);
                         <div class="mb-3">
                             <input type="hidden" name="form_field_name_<?=$arResult['ID'];?>_<?=$key;?>" value="<?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?>">
                             <label for="form_field_<?=$arResult['ID'];?>_<?=$key;?>" class="form-label"><?=$form_field['SUB_VALUES']['form_field_name']['VALUE'];?></label>
-                            <textarea name="form_field_<?=$arResult['ID'];?>_<?=$key;?>" id="form_field_<?=$arResult['ID'];?>_<?=$key;?>" class="form-control" cols="30" rows="10" placeholder="<?=$form_field['SUB_VALUES']['form_field_placeholder']['VALUE'];?>"></textarea>
+                            <textarea name="form_field_<?=$arResult['ID'];?>_<?=$key;?>" id="form_field_<?=$arResult['ID'];?>_<?=$key;?>" class="form-control" cols="30" rows="2" placeholder="<?=$form_field['SUB_VALUES']['form_field_placeholder']['VALUE'];?>"></textarea>
                         </div>
                     <?php }
                     else if( $form_field['SUB_VALUES']['form_field_type']['VALUE_XML_ID'] == 'bdate' ){ ?>

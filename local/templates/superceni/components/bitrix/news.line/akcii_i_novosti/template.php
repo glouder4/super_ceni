@@ -13,7 +13,7 @@
 $this->setFrameMode(true);
 ?>
 
-<div class="row ms-0 me-0 mt-3" id="news_items">
+<div class="row ms-0 me-0 mt-3 owl-carousel owl-theme" id="news_items">
     <?foreach($arResult["ITEMS"] as $key => $arItem):?>
         <?php
             if (CModule::IncludeModule("iblock")):
@@ -25,7 +25,7 @@ $this->setFrameMode(true);
                     $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
                     $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
                     ?>
-                    <div id="<?=$this->GetEditAreaId($arItem['ID']);?>" class="col-12 p-0 col-md-4 news-item <?=($key > 0 ) ? 'mt-3' : ''?> <?=($key > 2 ) ? 'mt-3' : 'mt-md-0'?>">
+                    <div id="<?=$this->GetEditAreaId($arItem['ID']);?>" class="col-12 p-0 news-item">
                         <div class="col-12 col-md-11 mx-md-auto col-xxl-12 me-xxl-auto">
                             <div class="news-item_picture">
                                 <img src="<?=CFile::GetPath($arItem_properties['PREVIEW_PICTURE']);?>" alt="<?=$arItem_properties['NAME'];?>">
@@ -55,3 +55,25 @@ $this->setFrameMode(true);
         ?>
     <?endforeach;?>
 </div>
+
+<script>
+    $(document).ready(function(){
+        const slider = $("#news_items").owlCarousel({
+            loop:true,
+            margin:5,
+            nav:false,
+            dots: false,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                900:{
+                    items:3
+                },
+            }
+        });
+    });
+</script>

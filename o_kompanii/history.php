@@ -83,8 +83,8 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/inner_page.css");
                         <div class="row ms-0 me-0 mt-3">
                             <?php
                             foreach ($_SERVER['template_settings']['about_company_number']['VALUE'] as $key => $about_settings){ ?>
-                                <div class="col-12 col-sm-6 col-md-4 about_us-item text-center">
-                                    <div class="col-9 col-md-11 mx-auto d-flex flex-column flex-md-row pt-5 pb-5">
+                                <div class="col-<?=($key > 1) ? '12' : '6'?> col-sm-6 col-md-4 about_us-item text-center">
+                                    <div class="col-<?=($key > 1) ? '9' : '12'?> col-md-11 mx-auto d-flex flex-column flex-md-row pt-2 pb-2 pt-lg-5 pb-lg-5">
                                         <div class="d-flex flex-row justify-content-center align-items-center">
                                             <span><?=$_SERVER['template_settings']['about_company_number']['VALUE'][$key]?></span>
                                             <p class="text-start m-0"><?=$_SERVER['template_settings']['about_company_text']['~VALUE'][$key]?></p>
@@ -224,6 +224,30 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/inner_page.css");
 );?>
                 </div>
             </section>
+
+
+
+
+
+
+
+            <?$APPLICATION->IncludeComponent(
+	"star:vkcommunity", 
+	"vk_wall_posts", 
+	array(
+		"STAR_VKCOMMUNITY_ADDITIONAL_MODE" => "Y",
+		"STAR_VKCOMMUNITY_COLOR_1" => "FFFFFF",
+		"STAR_VKCOMMUNITY_COLOR_2" => "000000",
+		"STAR_VKCOMMUNITY_COLOR_3" => "249D4D",
+		"STAR_VKCOMMUNITY_HEIGHT" => "400",
+		"STAR_VKCOMMUNITY_ID" => "87462265",
+		"STAR_VKCOMMUNITY_MODE" => "4",
+		"STAR_VKCOMMUNITY_NO_COVER" => "Y",
+		"STAR_VKCOMMUNITY_WIDTH" => "419",
+		"COMPONENT_TEMPLATE" => "vk_wall_posts"
+	),
+	false
+);?>
         </div>
     </div>
 </div>

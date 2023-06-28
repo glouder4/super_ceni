@@ -22,7 +22,7 @@ $this->setFrameMode(true);
         <div class="product_card-image">
             <img src="<?=CFile::GetPath($arItem['PROPERTIES']['svg_icon']['VALUE']);?>" alt="<?=$arItem["NAME"];?>">
         </div>
-        <div class="product_card-title mt-3 text-center">
+        <div class="product_card-title mt-2 mt-lg-3 text-center">
             <span><?=htmlspecialchars_decode($arItem["NAME"]);?></span>
         </div>
     </div>

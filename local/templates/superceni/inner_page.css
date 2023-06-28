@@ -25,50 +25,7 @@
     -webkit-box-shadow: none;
     box-shadow: none;
 }
-.webform p.h4{
-    font-size: 21px;
-}
-.webform p{
-    font-size: 16px;
-}
-.webform svg{
-    -webkit-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-    width: 100%;
-}
-.webform-form label{
-    font-size: 16px;
-    font-weight: 400;
-}
-.webform-form input,.webform-form textarea{
-    border-color: #8B8B8B;
-}
-.webform-form input::-webkit-input-placeholder, .webform-form textarea::-webkit-input-placeholder{
-    color: #DBDBDB;
-}
-.webform-form input::-moz-placeholder, .webform-form textarea::-moz-placeholder{
-    color: #DBDBDB;
-}
-.webform-form input:-ms-input-placeholder, .webform-form textarea:-ms-input-placeholder{
-    color: #DBDBDB;
-}
-.webform-form input::-ms-input-placeholder, .webform-form textarea::-ms-input-placeholder{
-    color: #DBDBDB;
-}
-.webform-form input::placeholder,.webform-form textarea::placeholder{
-    color: #DBDBDB;
-}
-.webform-form .form-check label{
-    font-size: 13px;
-}
-.webform-form button[type='submit'],#vakansii .btn{
-    background-color: #249D4D;
-    color: white;
-    font-size: 16px;
-    border: 0;
-    padding: 10px 40px;
-}
+
 #shops_map .accordion-button,#shops_map .accordion-button:not(.collapsed){
     background-color: #F8F8F8;
 
@@ -128,22 +85,11 @@
 #additional_data-main_info ul>li{
     margin-top: 15px;
 }
-@media(min-width: 1200px){
-    .webform svg{
-        -webkit-transform: rotate(0);
-        -ms-transform: rotate(0);
-        transform: rotate(0);
-    }
-}
 @media(min-width: 1520px){
     .accordion .accordion-button{
         font-size: 24px;
     }
     #inner_page{
         margin-top: 75px;
-    }
-
-    .webform p.h4{
-        font-size: 27px;
     }
 }
