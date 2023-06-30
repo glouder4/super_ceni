@@ -89,52 +89,52 @@ $APPLICATION->SetTitle("1С-Битрикс: Управление сайтом");
     </div>
 </section>
 
-<section id="news" class="mt-5">
-        <div class="container">
-            <div class="section_title row ms-0 me-0">
-                <div class="col-12 col-md-6"><h2 class="text-center text-md-start">Акции и новости</h2></div>
-                <div class="col-12 d-none d-md-flex col-md-6 align-items-center justify-content-end">
-                    <a href="/pokupatelyam/akcii_i_novosti.php">
-                        Все акции и новости
-                        <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9697 0.46967C11.2626 0.176777 11.7374 0.176777 12.0303 0.46967L18.0303 6.46967C18.3232 6.76256 18.3232 7.23744 18.0303 7.53033L12.0303 13.5303C11.7374 13.8232 11.2626 13.8232 10.9697 13.5303C10.6768 13.2374 10.6768 12.7626 10.9697 12.4697L15.6893 7.75H1.5C1.08579 7.75 0.75 7.41421 0.75 7C0.75 6.58579 1.08579 6.25 1.5 6.25H15.6893L10.9697 1.53033C10.6768 1.23744 10.6768 0.762563 10.9697 0.46967Z" fill="#249D4D"/>
-                        </svg>
-                    </a>
-                </div>
+<!--<section id="news" class="mt-5">
+    <div class="container">
+        <div class="section_title row ms-0 me-0">
+            <div class="col-12 col-md-6"><h2 class="text-center text-md-start">Акции и новости</h2></div>
+            <div class="col-12 d-none d-md-flex col-md-6 align-items-center justify-content-end">
+                <a href="/pokupatelyam/akcii_i_novosti.php">
+                    Все акции и новости
+                    <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9697 0.46967C11.2626 0.176777 11.7374 0.176777 12.0303 0.46967L18.0303 6.46967C18.3232 6.76256 18.3232 7.23744 18.0303 7.53033L12.0303 13.5303C11.7374 13.8232 11.2626 13.8232 10.9697 13.5303C10.6768 13.2374 10.6768 12.7626 10.9697 12.4697L15.6893 7.75H1.5C1.08579 7.75 0.75 7.41421 0.75 7C0.75 6.58579 1.08579 6.25 1.5 6.25H15.6893L10.9697 1.53033C10.6768 1.23744 10.6768 0.762563 10.9697 0.46967Z" fill="#249D4D"/>
+                    </svg>
+                </a>
             </div>
-
-            <?$APPLICATION->IncludeComponent(
-	"bitrix:news.line", 
-	"akcii_i_novosti", 
-	array(
-		"COMPONENT_TEMPLATE" => "akcii_i_novosti",
-		"IBLOCK_TYPE" => "akcii_i_novosti",
-		"IBLOCKS" => array(
-			0 => "7",
-		),
-		"NEWS_COUNT" => "3",
-		"FIELD_CODE" => array(
-			0 => "ID",
-			1 => "NAME",
-			2 => "PREVIEW_TEXT",
-			3 => "PREVIEW_PICTURE",
-			4 => "DATE_CREATE",
-			5 => "",
-		),
-		"SORT_BY1" => "ID",
-		"SORT_ORDER1" => "ASC",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER2" => "ASC",
-		"DETAIL_URL" => "",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "300",
-		"CACHE_GROUPS" => "Y",
-		"ACTIVE_DATE_FORMAT" => "d.m.Y"
-	),
-	false
-);?>
         </div>
-    </section>
+
+        <?/*$APPLICATION->IncludeComponent(
+"bitrix:news.line",
+"akcii_i_novosti",
+            array(
+                "COMPONENT_TEMPLATE" => "akcii_i_novosti",
+                "IBLOCK_TYPE" => "akcii_i_novosti",
+                "IBLOCKS" => array(
+                    0 => "7",
+                ),
+                "NEWS_COUNT" => "3",
+                "FIELD_CODE" => array(
+                    0 => "ID",
+                    1 => "NAME",
+                    2 => "PREVIEW_TEXT",
+                    3 => "PREVIEW_PICTURE",
+                    4 => "DATE_CREATE",
+                    5 => "",
+                ),
+                "SORT_BY1" => "ID",
+                "SORT_ORDER1" => "ASC",
+                "SORT_BY2" => "SORT",
+                "SORT_ORDER2" => "ASC",
+                "DETAIL_URL" => "",
+                "CACHE_TYPE" => "A",
+                "CACHE_TIME" => "300",
+                "CACHE_GROUPS" => "Y",
+                "ACTIVE_DATE_FORMAT" => "d.m.Y"
+            ),
+            false
+        );*/?>
+    </div>
+</section>-->
     <?php
         if (CModule::IncludeModule('iblock')) {
             $arFilter = array('IBLOCK_ID' => 6);

@@ -243,7 +243,7 @@ $this->setFrameMode(true);
 
     </section>
 
-    <section id="news" class="mt-5">
+   <!-- <section id="news" class="mt-5">
         <div class="container">
             <div class="section_title row ms-0 me-0">
                 <div class="col-12 col-md-6"><h2 class="text-center text-md-start">Акции и новости</h2></div>
@@ -257,7 +257,7 @@ $this->setFrameMode(true);
                 </div>
             </div>
 
-            <?$APPLICATION->IncludeComponent(
+            <?/*$APPLICATION->IncludeComponent(
                 "bitrix:news.line",
                 "akcii_i_novosti",
                 array(
@@ -286,8 +286,8 @@ $this->setFrameMode(true);
                     "ACTIVE_DATE_FORMAT" => "d.m.Y"
                 ),
                 false
-            );?>
+            );*/?>
         </div>
-    </section>
+    </section>-->
 </div>
 

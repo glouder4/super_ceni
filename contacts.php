@@ -13,7 +13,7 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/inner_page.css");
                 "SITE_ID" => "s1"
             )
         );?>
-        <section id="news" class="mt-5">
+        <section id="news" class="mt-5 mt-xl-3">
             <div id="inner_page-data">
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:news.detail",

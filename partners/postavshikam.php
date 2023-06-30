@@ -16,7 +16,7 @@ $requested_item = preg_replace('/\\?.*/', '', $_SERVER['REQUEST_URI']);
                 "SITE_ID" => "s1"
             )
         );?>
-        <section id="news" class="mt-5">
+        <section id="news" class="mt-0">
             <div id="inner_page-data">
                 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.detail", 

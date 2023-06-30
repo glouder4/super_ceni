@@ -7,12 +7,12 @@ $aMenuLinks = [
         [],
         ""
     ],
-    [
+    /*[
         "Акции и новости",
         "/pokupatelyam/akcii_i_novosti.php",
         [],
         [],
         ""
-    ],
+    ],*/
 ];
 ?>

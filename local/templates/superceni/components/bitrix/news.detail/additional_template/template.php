@@ -18,7 +18,7 @@ $this->setFrameMode(true);
 
     <?php
     if( strlen($arResult["DETAIL_TEXT"]) > 0 ){ ?>
-        <div id="additional_page_data" class="mt-5 row ms-0 me-0 col-12 p-0">
+        <div id="additional_page_data" class="mt-5 row ms-0 me-0 col-12 p-0 mt-xl-3">
             <div class="col-12 col-md-6 p-0" id="additional_data-main_info">
                 <div class="col-12 col-md-11 me-auto">
                     <h1 class="mt-0"><?=$arResult["NAME"]?></h1>
@@ -65,7 +65,7 @@ $this->setFrameMode(true);
     ?>
 
     <?php
-        if( count($arResult['PROPERTIES']['accordion']['VALUE']) > 0 ){ ?>
+        if( count($arResult['PROPERTIES']['accordion']['VALUE']) > 1 ){ ?>
             <div id="accordion_page_data" class="col-12 p-0 accordion mt-5">
 
                 <?php
@@ -268,7 +268,7 @@ $this->setFrameMode(true);
     );?>
 
 
-    <section id="news" class="mt-5">
+    <!--<section id="news" class="mt-5">
         <div class="container">
             <div class="section_title row ms-0 me-0">
                 <div class="col-12 col-md-6"><h2 class="text-center text-md-start">Акции и новости</h2></div>
@@ -282,7 +282,7 @@ $this->setFrameMode(true);
                 </div>
             </div>
 
-            <?$APPLICATION->IncludeComponent(
+            <?/*$APPLICATION->IncludeComponent(
                 "bitrix:news.line",
                 "akcii_i_novosti",
                 array(
@@ -311,8 +311,8 @@ $this->setFrameMode(true);
                     "ACTIVE_DATE_FORMAT" => "d.m.Y"
                 ),
                 false
-            );?>
+            );*/?>
         </div>
-    </section>
+    </section>-->
 </div>
 
