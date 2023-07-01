@@ -18,13 +18,16 @@ $menuBlockId = "catalog_menu_".$this->randString();
 			<a href="<?=$arResult["ALL_ITEMS"][$itemID]["LINK"]?>" <?if (is_array($arColumns) && count($arColumns) > 0 && $existPictureDescColomn):?>onmouseover="BX.CatalogVertMenu.changeSectionPicture(this);"<?endif?>>
 				<?=$arResult["ALL_ITEMS"][$itemID]["TEXT"]?>
 				<span class="bx_shadow_fix"></span>
+
+                <?if (is_array($arColumns) && count($arColumns) > 0):?>
+                    <div class="dropdown_arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#000000"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+                    </div>
+                <?endif?>
 			</a>
 		<?if (is_array($arColumns) && count($arColumns) > 0):?>
 			<span style="display: none">
 				<?=$arResult["ALL_ITEMS"][$itemID]["PARAMS"]["description"]?>
-			</span>
-			<span class="bx_children_advanced_panel">
-				<img src="<?=$arResult["ALL_ITEMS"][$itemID]["PARAMS"]["picture_src"]?>" alt="">
 			</span>
 			<div class="bx_children_container b<?=($existPictureDescColomn) ? count($arColumns)+1 : count($arColumns)?>">
 				<?foreach($arColumns as $key=>$arRow):?>

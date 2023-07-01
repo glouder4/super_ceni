@@ -117,10 +117,24 @@
                             ?>
                         </div>
                     </div>
+
+                    <div class="col-12 mt-3 mt-xxl-5 d-md-none d-xxl-block" id="global_footer-contacts">
+
+                        <div class="col-12">
+                            <div class="h5 m-0"><span>Телефоны</span></div>
+                            <div class="d-flex flex-column flex-wrap mt-2 mt-lg-0">
+                                <?php
+                                foreach($_SERVER['template_settings']['phones']['VALUE'] as $phone){ ?>
+                                    <a href="tel:<?=phone_formatter($phone['SUB_VALUES']['phone']['VALUE']);?>"><?=$phone['SUB_VALUES']['phone']['VALUE'];?></a>
+                                <?php }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-12 d-none d-md-block d-xxl-none order-4 d-xxl-none">
+            <div class="col-12 d-none d-md-block order-4 d-xxl-none">
                 <div class="col-12 mt-3 mt-lg-0" id="global_footer-social_links_md">
                     <div class="h5 m-0"><span>Мы в социальных сетях</span></div>
                     <div class="d-flex flex-row flex-wrap mt-2 mt-lg-0">
@@ -131,10 +145,36 @@
                         ?>
                     </div>
                 </div>
+
+                <div class="col-12 mt-3 mt-lg-5 col-xl-7 me-xl-auto" id="global_footer-contacts_md">
+                    <div class="row ms-0 me-0">
+
+                        <div class="col-12 col-md-4 pe-md-0">
+                            <div class="h5 m-0"><span>Телефоны</span></div>
+                            <div class="d-flex flex-column flex-wrap mt-2 mt-lg-0">
+                                <?php
+                                foreach($_SERVER['template_settings']['phones']['VALUE'] as $phone){ ?>
+                                    <a href="tel:<?=phone_formatter($phone['SUB_VALUES']['phone']['VALUE']);?>"><?=$phone['SUB_VALUES']['phone']['VALUE'];?></a>
+                                <?php }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="col-12 mt-4 order-5 mt-lg-5" id="global_footer-after_footer_data">
-                <p class="mt-2 mb-0">© <?=date('Y');?> UNIBox. Все права защищены</p>
+                <div class="row ms-0 me-0">
+                    <div class="col-12 col-md-4 col-xxl-3">
+                        <p class="mt-2 mb-0">© <?=date('Y');?> UNIBox. Все права защищены</p>
+                    </div>
+                    <div class="col-12 col-md-4 col-xxl-3">
+                        <p class="mt-2 mb-0"><span>Адрес:</span> <?=$_SERVER['template_settings']['adress']['VALUE'];?></p>
+                    </div>
+                    <div class="col-12 col-md-4 col-xxl-6">
+                        <p class="mt-2 mb-0"><span>Режим работы:</span> <?=$_SERVER['template_settings']['time_of_work']['VALUE'];?></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

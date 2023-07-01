@@ -19,13 +19,13 @@ $this->setFrameMode(true);
         <p><?echo $arResult["DETAIL_TEXT"];?></p>
     </div>
     <div class="col-12 col-md-6">
-        <div class="row ms-0 me-0">
-            <div class="col-12 col-md-6">
+        <div class="row ms-0 me-0 owl-carousel owl-theme">
+            <div class="col-12 col-md-12">
                 <div class="col-12 p-0 mx-auto">
                     <img src="<?=CFile::GetPath($arResult["DISPLAY_PROPERTIES"]['images']['VALUE'][0]['SUB_VALUES']['image_item']['VALUE']);?>" alt="">
                 </div>
             </div>
-            <div class="col-12 mt-2 col-md-6 mt-md-0">
+            <div class="col-12 mt-2 col-md-12 mt-md-0">
                 <div class="col-12 p-0 mx-auto">
                     <img src="<?=CFile::GetPath($arResult["DISPLAY_PROPERTIES"]['images']['VALUE'][1]['SUB_VALUES']['image_item']['VALUE']);?>" alt="">
                 </div>
@@ -33,3 +33,22 @@ $this->setFrameMode(true);
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        const slider = $(".owl-carousel").owlCarousel({
+            loop:false,
+            margin:5,
+            nav:false,
+            dots: false,
+            responsive:{
+                0:{
+                    items:1
+                },
+                991:{
+                    items:2
+                },
+            }
+        });
+    });
+</script>

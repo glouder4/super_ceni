@@ -191,6 +191,9 @@ body #global_header #mobile_navigation_bar nav li>a,body #global_header #mobile_
 
     font-size: 21px;
 }
+.owl-carousel .owl-stage-outer{
+    padding: 0;
+}
 
 
 body #global_header .hmb_col_title{
@@ -289,6 +292,7 @@ section>.container h2{
     margin-top: 45px;
     padding-top: 30px;
     padding-bottom: 30px;
+    background-size: 100% 100%;
 }
 #frontpage-banner .banner_data{
     background-color: rgba(0,0,0,0.3);
@@ -508,10 +512,17 @@ footer#global_footer #global_footer-searcher button[type="submit"]{
     outline: none;
     border: none;
 }
-footer#global_footer #global_footer-social_links span,footer#global_footer #global_footer-social_links_md span{
+footer#global_footer #global_footer-social_links span,footer#global_footer #global_footer-social_links_md span,
+footer#global_footer #global_footer-contacts span,footer#global_footer #global_footer-contacts_md span{
     color: #F2F2F2;
     font-size: 18px;
     font-weight: 400;
+}
+footer#global_footer #global_footer-contacts p,footer#global_footer #global_footer-contacts a,
+footer#global_footer #global_footer-contacts_md p,footer#global_footer #global_footer-contacts_md a{
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
 }
 footer#global_footer #global_footer-social_links>.d-flex,footer#global_footer #global_footer-social_links_md>.d-flex{
     gap: 10px;
@@ -519,9 +530,10 @@ footer#global_footer #global_footer-social_links>.d-flex,footer#global_footer #g
 footer#global_footer #global_footer-after_footer_data{
     border-top: 1px solid #F2F2F2;
 }
-footer#global_footer #global_footer-after_footer_data>p{
+footer#global_footer #global_footer-after_footer_data p,footer#global_footer #global_footer-after_footer_data p>span{
     color: #F2F2F2;
 }
+
 #product_categories #product_categories-list{
     gap: 2px;
     -webkit-box-pack: center;
@@ -666,6 +678,7 @@ footer#global_footer #global_footer-after_footer_data>p{
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
+        background-size: cover;
     }
     #about_us #about_us-items .about_us-item>div{
         gap: 10px;
