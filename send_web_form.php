@@ -1,45 +1,59 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
 
-use local\templates\superceni\PHPMAILER\PHPMailer;
-use local\templates\superceni\PHPMAILER\Exception;
+use Bitrix\Main\Application;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-print_r($_POST);
+require($_SERVER['DOCUMENT_ROOT'] . '/PHPMAILER/src/PHPMailer.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/PHPMAILER/src/SMTP.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/PHPMAILER/src/Exception.php');
+
+//print_r($_POST);
 
 function custom_mail($to, $subject, $message, $additionalHeaders = '')
 {
-    require_once($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
-    $mail = new PHPMailer();
-
-    /* Решение проблем для старых версий Битрикса, когда письма приходят с закодированным заголовком
-      $subject = str_replace('=?UTF-8?B?', '', $subject);
-      $subject = str_replace('?=', '', $subject);
-      $subject = base64_decode($subject);
-    //*/
     try {
-        $mail->IsSMTP();
-        $mail->SMTPAuth      = true;
-        $mail->SMTPKeepAlive = true;
-        $mail->SMTPDebug = 1;
-        $mail->SMTPSecure = 'ssl';
-        $mail->Host = 'smtp.yandex.ru';
-        $mail->Port = 465; // 587
-        $mail->Username = 'no@oddler.ru';
-        $mail->Password = 'Password';
-        $mail->CharSet =  'UTF-8'; // 'Windows-1251'
-
-        $mail->SetFrom($mail->Username);
-        $mail->AddAddress(trim($to));
+        $mail = new PHPMailer;
+        $mail->IsSMTP(); // enable SMTP
+        $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+        $mail->SMTPAuth = true; // authentication enabled
+        $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+        $mail->Host = "smtp.beget.com";
+        $mail->Port = 465; // or 587
+        $mail->IsHTML(true);
+        $mail->Username = "btest@3dlookinside.ru";
+        $mail->Password = "Eryjsn567!";
+        $mail->SetFrom("btest@3dlookinside.ru");
         $mail->Subject = $subject;
-        $mail->MsgHTML($message);
-
-        $bRet = $mail->Send();
-
-        $mail->ClearAddresses();
-        $mail->ClearAttachments();
-
-        return $bRet;
-
+        $mail->Body = $message;
+        foreach ($to as $email_to) $mail->AddAddress(trim($email_to));
+        if(!$mail->Send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        } else {
+            echo 200;
+        }
     } catch (Exception $e) {
-        die('Message could not be sent. Mailer Error: '. $mail->ErrorInfo);
+        echo $e->errorMessage();
+    } catch (\Exception $e) {
+        echo $e->getMessage();
     }
 }
+
+function validate_webform($fields){
+    if( $fields['checkbox'] == 'on' ){
+        $form_id = $fields['form_id'];
+        $count_of_fields = $fields['count_of_fields'];
+
+        $message = '';
+        for($i = 0; $i < $count_of_fields; $i++){
+            $message .= $fields['form_field_name_'.$form_id.'_'.$i].': '.$fields['form_field_'.$form_id.'_'.$i].'<br/>';
+        }
+        $emails = COption::GetOptionString("main", "all_bcc", "");
+
+        return custom_mail(explode(',' , $emails),'Заполнена форма!',$message);
+    }
+    else return false;
+}
+
+validate_webform($_POST);
