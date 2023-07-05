@@ -1,3 +1,14 @@
+$.fn.toggleAttr = function (attr, callback) {
+    return this.each(function () {
+        var $this = $(this);
+        if (callback.call(this)) {
+            $this.attr(attr, true);
+        } else {
+            $this.removeAttr(attr);
+        }
+    });
+};
+
 $(document).ready(function(){
     $('#global_header-mobile_searcher-openner').click(function (){
        $('#global_header-mobile_searcher').addClass('show');
@@ -34,177 +45,155 @@ $(document).ready(function(){
     });
 
     let adresses = [];
-
-    //Загружаем карту
-    ymaps.ready(function () {
-        //создаем точки по элементам
-        function createDealersOnMap() {
-            myMap.geoObjects.removeAll();
-            $('input[type=radio][name=coord]').removeAttr('checked');
-            $.each(adresses,function () {
-                if( this.is_point == true ){
-                    coord = this;
-                    coord = coord.coordinates.split(',');
-                    adr = coord.name;
-                    var myPlace = new ymaps.Placemark(
-                        [coord[0], coord[1]],
-                        {balloonContent: adr},
-                        {
-                            balloonPanelMaxMapArea: 0,
-                            preset: 'islands#darkOrangeDotIcon'
-                        }
-                    );
-                    myMap.geoObjects.add(myPlace);
-                }
-            });
-        }
-        $.ajax({
-            url: '/get_map_data.php',
-            method: 'get',
-            dataType: 'json',
-            success: function(data){
-                adresses = data;
-
-                createDealersOnMap();
-            }
-        });
-
-        //рисуем карту
-        var coordinate = "54.710162, 20.510137";
-        var myMap = new ymaps.Map("sidemap", {
-            // center: [coordinate[0],coordinate[1]],
-            center: coordinate.split(','),
-            zoom: 9,
-            controls: ['zoomControl']
-        });
-
-        // переход карты к другим координатам
-        function clickGoto(pos) {
-            pos = pos.split(',');
-
-            var mypos = [];
-            mypos = [Number(pos[0]), Number(pos[1])];
-            // переходим по координатам
-            myMap.panTo(mypos, {
-                flying: 1
-            });
-
-            return false;
-        }
-
-        //Выбор другого города
-        $('.section_title').click(function () {
-            coord = $(this).data('citycoord');
-            //console.log(coord);
-            clickGoto(coord);
-            createDealersOnMap();
-        });
-
-
-        $('#list_of_adreses>#list_of_none_points>ul>li').click(function(){
-            if($(this).attr('data-parent') == undefined){
-                let parent_id = $(this).attr('data-id');
-
-                $('#map  #list_of_adreses>#list_of_none_points').removeClass('show');
-                $('#map  #list_of_adreses>#list_of_none_points').hide();
-
-                $('#map  #list_of_adreses>#list_of_points').addClass('show');
-                $('#map  #list_of_adreses>#list_of_points').fadeIn();
-
-                $.each($('#map  #list_of_adreses>#list_of_points li'),function(){
-                    if( $(this).attr('data-parent') != parent_id ) $(this).hide();
-                    else $(this).show();
+    if( $("section#map").length > 0 ) {
+        //Загружаем карту
+        ymaps.ready(function () {
+            //создаем точки по элементам
+            function createDealersOnMap() {
+                myMap.geoObjects.removeAll();
+                $('input[type=radio][name=coord]').removeAttr('checked');
+                $.each(adresses, function () {
+                    if (this.is_point == true) {
+                        coord = this;
+                        coord = coord.coordinates.split(',');
+                        adr = coord.name;
+                        var myPlace = new ymaps.Placemark(
+                            [coord[0], coord[1]],
+                            {balloonContent: adr},
+                            {
+                                balloonPanelMaxMapArea: 0,
+                                preset: 'islands#darkOrangeDotIcon'
+                            }
+                        );
+                        myMap.geoObjects.add(myPlace);
+                    }
                 });
             }
-        });
-        $('#list_of_adreses>#list_of_points>ul>li').click(function(){
-            myMap.geoObjects.removeAll();
 
-            coord = $(this).attr('data-coord');
-            coord = coord.split(',');
-            adr = $(this).val();
+            $.ajax({
+                url: '/get_map_data.php',
+                method: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    adresses = data;
 
-            var myPlace = new ymaps.Placemark(
-                [coord[0], coord[1]],
-                {balloonContent: adr},
-                {
-                    balloonPanelMaxMapArea: 0,
-                    preset: 'islands#darkOrangeDotIcon'
+                    createDealersOnMap();
                 }
-            );
-            myMap.geoObjects.add(myPlace);
+            });
 
-            $('#map  #list_of_adreses>#list_of_points').hide();
+            //рисуем карту
+            var coordinate = "54.710162, 20.510137";
+            var myMap = new ymaps.Map("sidemap", {
+                // center: [coordinate[0],coordinate[1]],
+                center: coordinate.split(','),
+                zoom: 9,
+                controls: ['zoomControl']
+            });
+
+
+            $('#list_of_adreses>#list_of_none_points>ul>li').click(function () {
+                if ($(this).attr('data-parent') == undefined) {
+                    let parent_id = $(this).attr('data-id');
+
+                    $('#map  #list_of_adreses>#list_of_none_points').removeClass('show');
+                    $('#map  #list_of_adreses>#list_of_none_points').hide();
+
+                    $('#map  #list_of_adreses>#list_of_points').addClass('show');
+                    $('#map  #list_of_adreses>#list_of_points').fadeIn();
+
+                    $.each($('#map  #list_of_adreses>#list_of_points li'), function () {
+                        if ($(this).attr('data-parent') != parent_id) $(this).hide();
+                        else $(this).show();
+                    });
+                }
+            });
+            $('#list_of_adreses>#list_of_points>ul>li').click(function () {
+                myMap.geoObjects.removeAll();
+
+                coord = $(this).attr('data-coord');
+                coord = coord.split(',');
+                adr = $(this).val();
+
+                var myPlace = new ymaps.Placemark(
+                    [coord[0], coord[1]],
+                    {balloonContent: adr},
+                    {
+                        balloonPanelMaxMapArea: 0,
+                        preset: 'islands#darkOrangeDotIcon'
+                    }
+                );
+                myMap.geoObjects.add(myPlace);
+
+                $('#map  #list_of_adreses>#list_of_points').hide();
+                $('#map  #list_of_adreses>#list_of_none_points').show();
+
+                $('#map  #list_of_adreses>#list_of_none_points').addClass('show');
+                $('#map  #list_of_adreses>#list_of_points').removeClass('show');
+
+                $('#map  #list_of_adreses').removeClass('show');
+
+                myMap.setCenter(coord);
+
+                if ($("#shop_data-name").length > 0) {
+                    $("#shop_data-name")[0].innerText = $(this)[0].innerText.split(',').join(', ');
+                    $('#shop_data-adress')[0].innerHTML = `<span>Адрес:</span> ` + $(this).attr('data-adress');
+                    $('#shop_data-time_of_work')[0].innerHTML = `<span>Время работы:</span> ` + $(this).attr('data-time_of_work');
+                    $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> ` + $(this).attr('data-phone');
+                    $('#shop_data-picture').attr('src', $(this).attr('data-picture'));
+                }
+            })
+
+
+            $('.accordion-collapse ul>li').click(function () {
+                myMap.geoObjects.removeAll();
+
+                coord = $(this).attr('data-coord');
+                coord = coord.split(',');
+                adr = $(this).val();
+
+                var myPlace = new ymaps.Placemark(
+                    [coord[0], coord[1]],
+                    {balloonContent: adr},
+                    {
+                        balloonPanelMaxMapArea: 0,
+                        preset: 'islands#darkOrangeDotIcon'
+                    }
+                );
+                myMap.geoObjects.add(myPlace);
+
+                myMap.setCenter(coord);
+                if ($("#shop_data-name").length > 0) {
+                    $("#shop_data-name")[0].innerText = $(this)[0].innerText.split(',').join(', ');
+                    $('#shop_data-adress')[0].innerHTML = `<span>Адрес:</span> ` + $(this).attr('data-adress');
+                    $('#shop_data-time_of_work')[0].innerHTML = `<span>Время работы:</span> ` + $(this).attr('data-time_of_work');
+                    $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> ` + $(this).attr('data-phone');
+                    $('#shop_data-picture').attr('src', $(this).attr('data-picture'));
+                    //.css('background-image','url('+$(this).attr('data-m_bg')+')');
+                }
+            });
+
+        });
+
+        $('#map #map-navigation>#show_list_of_adreses').click(function () {
+            $('#map  #list_of_adreses').addClass('show');
+            $('#map  #list_of_adreses>#list_of_none_points').addClass('show');
+            $('#map  #list_of_adreses>#list_of_points').removeClass('show');
+
             $('#map  #list_of_adreses>#list_of_none_points').show();
+            $('#map  #list_of_adreses>#list_of_points').hide();
+        });
+        $('#map #close_list').click(function () {
+            if ($('#map  #list_of_adreses>#list_of_none_points').hasClass('show')) {
+                $('#map  #list_of_adreses').removeClass('show');
+            } else {
+                $('#map  #list_of_adreses>#list_of_points').hide();
+                $('#map  #list_of_adreses>#list_of_none_points').fadeIn();
 
-            $('#map  #list_of_adreses>#list_of_none_points').addClass('show');
-            $('#map  #list_of_adreses>#list_of_points').removeClass('show');
-
-            $('#map  #list_of_adreses').removeClass('show');
-
-            myMap.setCenter(coord);
-
-            if( $("#shop_data-name").length > 0 ){
-                $("#shop_data-name")[0].innerText = $(this)[0].innerText.split(',').join(', ');
-                $('#shop_data-adress')[0].innerHTML = `<span>Адрес:</span> `+$(this).attr('data-adress');
-                $('#shop_data-time_of_work')[0].innerHTML = `<span>Время работы:</span> `+$(this).attr('data-time_of_work');
-                $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> `+$(this).attr('data-phone');
-            }
-        })
-
-
-        $('.accordion-collapse ul>li').click(function(){
-            myMap.geoObjects.removeAll();
-
-            coord = $(this).attr('data-coord');
-            coord = coord.split(',');
-            adr = $(this).val();
-
-            var myPlace = new ymaps.Placemark(
-                [coord[0], coord[1]],
-                {balloonContent: adr},
-                {
-                    balloonPanelMaxMapArea: 0,
-                    preset: 'islands#darkOrangeDotIcon'
-                }
-            );
-            myMap.geoObjects.add(myPlace);
-
-            myMap.setCenter(coord);
-            if( $("#shop_data-name").length > 0 ) {
-                $("#shop_data-name")[0].innerText = $(this)[0].innerText.split(',').join(', ');
-                $('#shop_data-adress')[0].innerHTML = `<span>Адрес:</span> ` + $(this).attr('data-adress');
-                $('#shop_data-time_of_work')[0].innerHTML = `<span>Время работы:</span> ` + $(this).attr('data-time_of_work');
-                $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> ` + $(this).attr('data-phone');
-                $('#shop_data-picture').attr('src', $(this).attr('data-picture'));
-                //.css('background-image','url('+$(this).attr('data-m_bg')+')');
+                $('#map  #list_of_adreses>#list_of_none_points').addClass('show');
+                $('#map  #list_of_adreses>#list_of_points').removeClass('show');
             }
         });
-
-    });
-
-    $('#map #map-navigation>#show_list_of_adreses').click(function(){
-        $('#map  #list_of_adreses').addClass('show');
-        $('#map  #list_of_adreses>#list_of_none_points').addClass('show');
-        $('#map  #list_of_adreses>#list_of_points').removeClass('show');
-
-        $('#map  #list_of_adreses>#list_of_none_points').show();
-        $('#map  #list_of_adreses>#list_of_points').hide();
-    });
-    $('#map #close_list').click(function(){
-        if( $('#map  #list_of_adreses>#list_of_none_points').hasClass('show') ){
-            $('#map  #list_of_adreses').removeClass('show');
-        }
-        else{
-            $('#map  #list_of_adreses>#list_of_points').hide();
-            $('#map  #list_of_adreses>#list_of_none_points').fadeIn();
-
-            $('#map  #list_of_adreses>#list_of_none_points').addClass('show');
-            $('#map  #list_of_adreses>#list_of_points').removeClass('show');
-        }
-    });
-
-    let sub_open = false;
+    }
 
     $('body #global_header #mobile_navigation_bar .multilevel_custom_menu>ul>li.dropdown>.like_link').click(function(e){
         e.preventDefault();
@@ -215,5 +204,49 @@ $(document).ready(function(){
         e.preventDefault();
 
         $($(this)[0].offsetParent.parentElement).removeClass('active_sub');
+    });
+
+
+    var collapse1 = document.getElementById('collapse1');
+    var collapse2 = document.getElementById('collapse2');
+
+    let is_accordion_1_closed = 1;  let is_accordion_2_closed = 1;
+
+    $('#shops_1').click(function(){
+        if($(this).attr("data-collapsed") == 'true'){
+            $(this).attr("data-collapsed",false);
+            is_accordion_1_closed = 0;
+        }
+        else{
+            $(this).attr("data-collapsed",true);
+            is_accordion_1_closed = 1;
+        }
+
+        if(is_accordion_2_closed == 0){
+            new bootstrap.Collapse(collapse2, {
+                hide: true
+            });
+            $('#shops_2').attr("data-collapsed",true);
+            is_accordion_2_closed = 1;
+        }
+    });
+
+    $('#shops_2').click(function(){
+        if($(this).attr("data-collapsed") == 'true'){
+            $(this).attr("data-collapsed",false);
+            is_accordion_2_closed = 0;
+        }
+        else{
+            $(this).attr("data-collapsed",true);
+            is_accordion_2_closed = 1;
+        }
+
+        if(is_accordion_1_closed == 0){
+            new bootstrap.Collapse(collapse1, {
+                hide: true
+            });
+            $('#shops_1').attr("data-collapsed",true);
+            is_accordion_1_closed = 1;
+        }
     });
 });

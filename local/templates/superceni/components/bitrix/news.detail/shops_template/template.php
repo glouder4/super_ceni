@@ -86,10 +86,10 @@ $this->setFrameMode(true);
     <div class="col-12 col-md-12 p-0">
         <div class="row ms-0 me-0">
             <div class="col-12 col-md-6 ps-0">
-                <div class="accordion d-none d-lg-block" id="shops_1">
+                <div class="accordion d-none d-lg-block" id="shops_1" data-collapsed="true">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="heading1">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                            <button class="accordion-button collapsed" id="accordion_button_1" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
                                 Калининградская область
                             </button>
                         </h2>
@@ -141,10 +141,10 @@ $this->setFrameMode(true);
             </div>
 
             <div class="col-12 col-md-6 pe-0">
-                <div class="accordion d-none d-lg-block" id="shops_2">
+                <div class="accordion d-none d-lg-block" id="shops_2" data-collapsed="true">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="heading2">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                            <button class="accordion-button collapsed" id="accordion_button_2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
                                 Краснодарский край
                             </button>
                         </h2>
