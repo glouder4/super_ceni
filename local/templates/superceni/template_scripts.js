@@ -212,15 +212,9 @@ $(document).ready(function(){
 
     let is_accordion_1_closed = 1;  let is_accordion_2_closed = 1;
 
-    $('#shops_1').click(function(){
-        if($(this).attr("data-collapsed") == 'true'){
-            $(this).attr("data-collapsed",false);
-            is_accordion_1_closed = 0;
-        }
-        else{
-            $(this).attr("data-collapsed",true);
-            is_accordion_1_closed = 1;
-        }
+    collapse1.addEventListener('show.bs.collapse', function () {
+        $('#shops_1').attr("data-collapsed",false);
+        is_accordion_1_closed = 0;
 
         if(is_accordion_2_closed == 0){
             new bootstrap.Collapse(collapse2, {
@@ -229,17 +223,20 @@ $(document).ready(function(){
             $('#shops_2').attr("data-collapsed",true);
             is_accordion_2_closed = 1;
         }
+
+        return;
     });
 
-    $('#shops_2').click(function(){
-        if($(this).attr("data-collapsed") == 'true'){
-            $(this).attr("data-collapsed",false);
-            is_accordion_2_closed = 0;
-        }
-        else{
-            $(this).attr("data-collapsed",true);
-            is_accordion_2_closed = 1;
-        }
+    collapse1.addEventListener('hide.bs.collapse', function () {
+        $('#shops_1').attr("data-collapsed",true);
+        is_accordion_1_closed = 1;
+
+        return;
+    });
+
+    collapse2.addEventListener('show.bs.collapse', function () {
+        $('#shops_2').attr("data-collapsed",false);
+        is_accordion_2_closed = 0;
 
         if(is_accordion_1_closed == 0){
             new bootstrap.Collapse(collapse1, {
@@ -248,5 +245,13 @@ $(document).ready(function(){
             $('#shops_1').attr("data-collapsed",true);
             is_accordion_1_closed = 1;
         }
+
+        return;
+    });
+    collapse2.addEventListener('hide.bs.collapse', function () {
+        $('#shops_2').attr("data-collapsed",true);
+        is_accordion_2_closed = 1;
+
+        return;
     });
 });

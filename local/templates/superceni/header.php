@@ -42,7 +42,6 @@ function phone_formatter($string){
 
         <?Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/template_styles.css");?>
         <?Asset::getInstance()->addJs("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js");?>
-        <?Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js");?>
         <?Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js");?>
         <?Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/wowjs@1.1.3/dist/wow.min.js");?>
         <?Asset::getInstance()->addJs("https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js");?>

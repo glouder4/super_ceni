@@ -22,9 +22,9 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '')
         $mail->Host = "smtp.beget.com";
         $mail->Port = 465; // or 587
         $mail->IsHTML(true);
-        $mail->Username = "btest@3dlookinside.ru";
-        $mail->Password = "Eryjsn567!";
-        $mail->SetFrom("btest@3dlookinside.ru");
+        $mail->Username = "";
+        $mail->Password = "";
+        $mail->SetFrom("");
         $mail->Subject = $subject;
         $mail->Body = $message;
         foreach ($to as $email_to) $mail->AddAddress(trim($email_to));
