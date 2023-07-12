@@ -17,11 +17,11 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '')
         $mail = new PHPMailer;
         $mail->IsSMTP(); // enable SMTP
         $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
-        $mail->charSet = "UTF-8";
+        $mail->CharSet = "utf-8";
         $mail->SMTPAuth = true; // authentication enabled
-        $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-        $mail->Host = "smtp.beget.com";
-        $mail->Port = 465; // or 587
+        $mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for Gmail
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 587; // or 587
         $mail->IsHTML(true);
         $mail->Username = "";
         $mail->Password = "";
