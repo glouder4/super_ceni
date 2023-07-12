@@ -805,6 +805,9 @@ footer#global_footer #global_footer-after_footer_data p,footer#global_footer #gl
 }
 
 @media(min-width: 1024px){
+    #frontpage-banner{
+        background-size: 100% 100%;
+    }
     #frontpage-banner h1{
         font-weight: 700;
         font-size: 50px;
@@ -887,7 +890,6 @@ footer#global_footer #global_footer-after_footer_data p,footer#global_footer #gl
     }
     #frontpage-banner{
         height: 680px;
-        background-size: cover;
     }
     #frontpage-banner .banner_data{
         background: unset;

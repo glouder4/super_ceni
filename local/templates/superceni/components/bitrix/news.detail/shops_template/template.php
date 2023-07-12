@@ -85,8 +85,8 @@ $this->setFrameMode(true);
     ?>
     <div class="col-12 col-md-12 p-0">
         <div class="row ms-0 me-0">
-            <div class="col-12 col-md-6 ps-0">
-                <div class="accordion d-none d-lg-block" id="shops_1" data-collapsed="true">
+            <div class="col-12 col-md-6 ps-lg-0">
+                <div class="accordion" id="shops_1" data-collapsed="true">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="heading1">
                             <button class="accordion-button collapsed" id="accordion_button_1" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
@@ -130,7 +130,7 @@ $this->setFrameMode(true);
                     </div>
                 </div>
 
-                <div id="selected_city_shop_data" class="col-12 h-100 d-flex flex-column justify-content-center">
+                <div id="selected_city_shop_data" class="col-12 h-100 d-flex flex-column justify-content-center d-none d-lg-block mt-5">
                     <div class="h4" id="shop_data-name">г. Советск ТЦ "Балтика"</div>
                     <div id="shop_data" class="mt-3">
                         <p id="shop_data-adress"><span>Адрес:</span> Калининградская обл., г. Советск, ул. Победы 18</p>
@@ -140,8 +140,8 @@ $this->setFrameMode(true);
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 pe-0">
-                <div class="accordion d-none d-lg-block" id="shops_2" data-collapsed="true">
+            <div class="col-12 col-md-6 pe-lg-0 mt-3 mt-lg-0">
+                <div class="accordion" id="shops_2" data-collapsed="true">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="heading2">
                             <button class="accordion-button collapsed" id="accordion_button_2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
@@ -189,6 +189,14 @@ $this->setFrameMode(true);
                     <div class="col-12 p-0 mx-auto">
                         <img id="shop_data-picture" src="<?=$arResult['DETAIL_PICTURE']['SRC']?>" alt="">
                     </div>
+                    <div id="selected_city_shop_data_m" class="col-12 h-100 mt-3 d-flex flex-column justify-content-center d-lg-none">
+                        <div class="h4" id="shop_data-name_m">г. Советск ТЦ "Балтика"</div>
+                        <div id="shop_data_m" class="mt-3">
+                            <p id="shop_data-adress_m"><span>Адрес:</span> Калининградская обл., г. Советск, ул. Победы 18</p>
+                            <p id="shop_data-time_of_work_m"><span>Время работы:</span> 10:00 - 20:00</p>
+                            <p id="shop_data-phone_m"><span>Телефон:</span> +7 (962) 258-40-81</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -197,7 +205,7 @@ $this->setFrameMode(true);
     <section id="map" class="mt-5">
 
         <div class="yandex-map closed">
-            <div id="map-navigation" class="d-lg-none">
+            <div id="map-navigation" class="d-none">
                 <div class="btn">На карте</div>
                 <div class="btn" id="show_list_of_adreses">Список адресов</div>
             </div>

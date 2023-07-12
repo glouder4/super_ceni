@@ -63,7 +63,7 @@ $APPLICATION->SetTitle("1С-Битрикс: Управление сайтом");
                     foreach ($slider['main_slider']['VALUE'] as $key => $slider_item){ $slider_item = $slider_item['SUB_VALUES']; ?>
                         <div class="carousel-item <?=($key == 0) ? 'active' : '';?>" data-bg="<?=CFile::GetPath($slider_item['main_slider_slide']['VALUE']);?>" data-m_bg="<?=CFile::GetPath($slider_item['main_slider_m_slide']['VALUE']);?>" style="background-image: url('<?=CFile::GetPath($slider_item['main_slider_slide']['VALUE']);?>');">
                             <div class="slide_data col-12 col-xxl-6">
-                                <div class="slide_counter d-none d-md-block"><?=($key+1 < 10) ? '0'.($key+1) : ($key+1) ; ?> / <span><?=(count($slider['main_slider']['VALUE']) < 10 ) ? '0'.count($slider['main_slider']['VALUE']) : count($slider['main_slider']['VALUE'])?></span></div>
+                                <div class="slide_counter d-none"><?=($key+1 < 10) ? '0'.($key+1) : ($key+1) ; ?> / <span><?=(count($slider['main_slider']['VALUE']) < 10 ) ? '0'.count($slider['main_slider']['VALUE']) : count($slider['main_slider']['VALUE'])?></span></div>
                                 <div class="slide_title mt-2 mt-md-0">
                                     <h4><?=$slider_item['main_slider_title']['VALUE'];?></h4>
                                 </div>

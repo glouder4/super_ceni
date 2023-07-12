@@ -44,6 +44,11 @@ $(document).ready(function(){
         }
     });
 
+    var collapse1 = document.getElementById('collapse1');
+    var collapse2 = document.getElementById('collapse2');
+
+    let is_accordion_1_closed = 1;  let is_accordion_2_closed = 1;
+
     let adresses = [];
     if( $("section#map").length > 0 ) {
         //Загружаем карту
@@ -141,6 +146,14 @@ $(document).ready(function(){
                     $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> ` + $(this).attr('data-phone');
                     $('#shop_data-picture').attr('src', $(this).attr('data-picture'));
                 }
+
+                if ($("#shop_data-name_m").length > 0) {
+                    $("#shop_data-name_m")[0].innerText = $(this)[0].innerText.split(',').join(', ');
+                    $('#shop_data-adress_m')[0].innerHTML = `<span>Адрес:</span> ` + $(this).attr('data-adress');
+                    $('#shop_data-time_of_work_m')[0].innerHTML = `<span>Время работы:</span> ` + $(this).attr('data-time_of_work');
+                    $('#shop_data-phone_m')[0].innerHTML = `<span>Телефон:</span> ` + $(this).attr('data-phone');
+                    $('#shop_data-picture_m').attr('src', $(this).attr('data-picture'));
+                }
             })
 
 
@@ -169,6 +182,29 @@ $(document).ready(function(){
                     $('#shop_data-phone')[0].innerHTML = `<span>Телефон:</span> ` + $(this).attr('data-phone');
                     $('#shop_data-picture').attr('src', $(this).attr('data-picture'));
                     //.css('background-image','url('+$(this).attr('data-m_bg')+')');
+
+                    if(is_accordion_2_closed == 0){
+                        new bootstrap.Collapse(collapse2, {
+                            hide: true
+                        });
+                        $('#shops_2').attr("data-collapsed",true);
+                        is_accordion_2_closed = 1;
+                    }
+                    else if(is_accordion_1_closed == 0){
+                        new bootstrap.Collapse(collapse1, {
+                            hide: true
+                        });
+                        $('#shops_1').attr("data-collapsed",true);
+                        is_accordion_1_closed = 1;
+                    }
+                }
+
+                if ($("#shop_data-name_m").length > 0) {
+                    $("#shop_data-name_m")[0].innerText = $(this)[0].innerText.split(',').join(', ');
+                    $('#shop_data-adress_m')[0].innerHTML = `<span>Адрес:</span> ` + $(this).attr('data-adress');
+                    $('#shop_data-time_of_work_m')[0].innerHTML = `<span>Время работы:</span> ` + $(this).attr('data-time_of_work');
+                    $('#shop_data-phone_m')[0].innerHTML = `<span>Телефон:</span> ` + $(this).attr('data-phone');
+                    $('#shop_data-picture_m').attr('src', $(this).attr('data-picture'));
                 }
             });
 
@@ -206,11 +242,6 @@ $(document).ready(function(){
         $($(this)[0].offsetParent.parentElement).removeClass('active_sub');
     });
 
-
-    var collapse1 = document.getElementById('collapse1');
-    var collapse2 = document.getElementById('collapse2');
-
-    let is_accordion_1_closed = 1;  let is_accordion_2_closed = 1;
 
     collapse1.addEventListener('show.bs.collapse', function () {
         $('#shops_1').attr("data-collapsed",false);
