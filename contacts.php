@@ -21,8 +21,8 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/inner_page.css");
                     array(
                         "COMPONENT_TEMPLATE" => "shops_template",
                         "IBLOCK_TYPE" => "o_kompanii",
-                        "IBLOCK_ID" => "6",
-                        "ELEMENT_ID" => "9",
+                        "IBLOCK_ID" => "11",
+                        "ELEMENT_ID" => "23",
                         "ELEMENT_CODE" => "",
                         "CHECK_DATES" => "Y",
                         "FIELD_CODE" => array(
