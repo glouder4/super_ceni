@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig authType="PASSWORD" host="onlinezx.beget.tech" id="49e75ab9-3654-464f-af06-270011ab3ce3" port="22" nameFormat="DESCRIPTIVE" username="onlinezx_super39" useOpenSSHConfig="false" />
+      <sshConfig authType="PASSWORD" host="37.46.135.59" id="49e75ab9-3654-464f-af06-270011ab3ce3" port="22" nameFormat="DESCRIPTIVE" username="root" useOpenSSHConfig="false" />
     </configs>
   </component>
 </project>

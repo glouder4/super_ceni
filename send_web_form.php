@@ -16,16 +16,13 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '')
     try {
         $mail = new PHPMailer;
         $mail->IsSMTP(); // enable SMTP
-        $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
-        $mail->CharSet = "utf-8";
+        $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+		$mail->CharSet = "utf-8";
         $mail->SMTPAuth = true; // authentication enabled
         $mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for Gmail
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 587; // or 587
         $mail->IsHTML(true);
-        $mail->Username = "";
-        $mail->Password = "";
-        $mail->SetFrom("");
         $mail->Subject = $subject;
         $mail->Body = $message;
         foreach ($to as $email_to) $mail->AddAddress(trim($email_to));

@@ -46,7 +46,7 @@ function phone_formatter($string){
         <?Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/wowjs@1.1.3/dist/wow.min.js");?>
         <?Asset::getInstance()->addJs("https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js");?>
         <?Asset::getInstance()->addJs("https://cdnjs.cloudflare.com/ajax/libs/jquery-animateNumber/0.0.9/jquery.animateNumber.min.js");?>
-        <?Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/sweetalert2@11");?>
+        <?Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/base/sweetalert.min.js");?>
         <?Asset::getInstance()->addJs("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js");?>
 
         <?Asset::getInstance()->addJs(SITE_TEMPLATE_PATH."/template_scripts.js");?>
