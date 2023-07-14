@@ -11,6 +11,8 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+
+ <?Asset::getInstance()->addCss(SITE_TEMPLATE_PATH."/components/bitrix/news.detail/webform_template/style.css");?>
 ?>
 
 <div class="mt-5 webform">

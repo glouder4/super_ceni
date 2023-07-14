@@ -93,7 +93,7 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/inner_page.css");
 	false
 );?>
 
-
+<div id="webform">
             <?$APPLICATION->IncludeComponent(
                 "bitrix:news.detail",
                 "webform_template",
@@ -154,9 +154,10 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/inner_page.css");
                 ),
                 false
             );?>
-
+</div>
 
         </div>
     </div>
+
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

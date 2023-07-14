@@ -184,7 +184,7 @@ $(document).ready(function(){
                     //.css('background-image','url('+$(this).attr('data-m_bg')+')');
 
                     if(is_accordion_2_closed == 0){
-                        new bootstrap.Collapse(collapse2, { 
+                        new bootstrap.Collapse(collapse2, {
                             hide: true
                         });
                         $('#shops_2').attr("data-collapsed",true);

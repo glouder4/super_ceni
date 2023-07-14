@@ -16,8 +16,8 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '')
     try {
         $mail = new PHPMailer;
         $mail->IsSMTP(); // enable SMTP
-        $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-		$mail->CharSet = "utf-8";
+        $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+        $mail->CharSet = "utf-8";
         $mail->SMTPAuth = true; // authentication enabled
         $mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for Gmail
         $mail->Host = "smtp.gmail.com";
