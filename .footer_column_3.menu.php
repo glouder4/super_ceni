@@ -15,8 +15,8 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Акции и новости", 
-		"/pokupatelyam/akcii_i_novosti.php", 
+		"Документы",
+		"/ohrana_truda.pdf",
 		Array(), 
 		Array(), 
 		"" 
